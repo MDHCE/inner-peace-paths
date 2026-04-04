@@ -5,8 +5,12 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Mail, Phone, Clock, User } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useSite } from "@/context/SiteContext";
 
-const SITE_URL = "https://zugloipszichologiaikozpont.hu";
+const SITE_URLS: Record<string, string> = {
+  zuglo: "https://zugloipszichologiaikozpont.hu",
+  gellert: "https://www.gellerthegyirendelo.hu",
+};
 
 interface Therapist {
   slug: string;
@@ -23,11 +27,13 @@ interface Therapist {
 
 const TherapistDetail = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { apiBase, therapistRoute, key } = useSite();
+  const SITE_URL = SITE_URLS[key];
   const [therapist, setTherapist] = useState<Therapist | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`/api/therapists/${slug}`)
+    fetch(`${apiBase}/therapists/${slug}`)
       .then((r) => {
         if (!r.ok) throw new Error("Not found");
         return r.json();
@@ -55,7 +61,7 @@ const TherapistDetail = () => {
         <div className="min-h-screen flex flex-col items-center justify-center pt-16 gap-4">
           <p className="text-muted-foreground text-lg">Szakember nem található.</p>
           <Link
-            to="/#szakembereink"
+            to={`${therapistRoute === "/szakemberek" ? "/" : "/gellert/"}#szakembereink`}
             className="text-primary hover:underline inline-flex items-center gap-2"
           >
             <ArrowLeft size={16} />
@@ -70,7 +76,7 @@ const TherapistDetail = () => {
   const pageDescription = therapist.description
     ? therapist.description.slice(0, 155).trimEnd() + "…"
     : `${therapist.name} – ${therapist.title}. Zuglói Pszichológiai Központ, Budapest XIV. kerület.`;
-  const canonicalUrl = `${SITE_URL}/szakemberek/${therapist.slug}`;
+  const canonicalUrl = `${SITE_URL}${therapistRoute}/${therapist.slug}`;
 
   const personSchema = {
     "@context": "https://schema.org",

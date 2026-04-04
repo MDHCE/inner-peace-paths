@@ -11,8 +11,9 @@ const require = createRequire(import.meta.url);
 try { require("dotenv").config(); } catch {}
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const THERAPISTS_FILE   = join(__dirname, "data", "therapists.json");
-const SOCIAL_POSTS_FILE = join(__dirname, "data", "social-posts.json");
+const THERAPISTS_FILE       = join(__dirname, "data", "therapists.json");      // unified, has .sites[]
+const SOCIAL_POSTS_FILE     = join(__dirname, "data", "social-posts.json");
+const GELLERT_SOCIAL_POSTS_FILE = join(__dirname, "data", "gellert-social-posts.json");
 
 const app = express();
 app.use(express.json());
@@ -52,41 +53,70 @@ function writeJSON(file, data) {
   writeFileSync(file, JSON.stringify(data, null, 2));
 }
 
-// ─── Therapists ──────────────────────────────────────────────────────────────
+// ─── Therapists (unified store, filtered by site) ────────────────────────────
 
+function makeTherapistRoutes(router, siteKey) {
+  // GET all for this site (public)
+  router.get("/therapists", (_req, res) => {
+    const all = readJSON(THERAPISTS_FILE);
+    res.json(all.filter((t) => (t.sites || []).includes(siteKey)));
+  });
+
+  // GET single (public — any site can fetch by slug)
+  router.get("/therapists/:slug", (req, res) => {
+    const therapist = readJSON(THERAPISTS_FILE).find((t) => t.slug === req.params.slug);
+    if (!therapist) return res.status(404).json({ error: "Therapist not found" });
+    res.json(therapist);
+  });
+}
+
+makeTherapistRoutes(app.route ? { get: (...a) => app.get(...a) } : app, "zuglo");
+
+// Zugló public routes use /api prefix (already on app)
 app.get("/api/therapists", (_req, res) => {
+  res.json(readJSON(THERAPISTS_FILE).filter((t) => (t.sites || []).includes("zuglo")));
+});
+app.get("/api/therapists/:slug", (req, res) => {
+  const t = readJSON(THERAPISTS_FILE).find((t) => t.slug === req.params.slug);
+  if (!t) return res.status(404).json({ error: "Therapist not found" });
+  res.json(t);
+});
+
+// Gellérthegyi public routes
+app.get("/api/gellert/therapists", (_req, res) => {
+  res.json(readJSON(THERAPISTS_FILE).filter((t) => (t.sites || []).includes("gellert")));
+});
+app.get("/api/gellert/therapists/:slug", (req, res) => {
+  const t = readJSON(THERAPISTS_FILE).find((t) => t.slug === req.params.slug);
+  if (!t) return res.status(404).json({ error: "Therapist not found" });
+  res.json(t);
+});
+
+// Admin: all therapists regardless of site (CRUD)
+app.get("/api/admin/therapists", requireAuth, (_req, res) => {
   res.json(readJSON(THERAPISTS_FILE));
 });
 
-app.get("/api/therapists/:slug", (req, res) => {
-  const therapist = readJSON(THERAPISTS_FILE).find((t) => t.slug === req.params.slug);
-  if (!therapist) return res.status(404).json({ error: "Therapist not found" });
-  res.json(therapist);
-});
-
-app.post("/api/therapists", requireAuth, (req, res) => {
+app.post("/api/admin/therapists", requireAuth, (req, res) => {
   const therapists = readJSON(THERAPISTS_FILE);
   const { slug, name } = req.body;
   if (!slug || !name) return res.status(400).json({ error: "slug and name are required" });
   if (therapists.find((t) => t.slug === slug))
-    return res.status(409).json({ error: "Therapist with this slug already exists" });
+    return res.status(409).json({ error: "Slug already exists" });
   const therapist = {
     slug, name,
-    title: req.body.title || "",
-    image: req.body.image || "",
-    description: req.body.description || "",
-    specialties: req.body.specialties || "",
-    education: req.body.education || "",
-    email: req.body.email || "",
-    phone: req.body.phone || "",
-    hours: req.body.hours || "",
+    title: req.body.title || "", image: req.body.image || "",
+    description: req.body.description || "", specialties: req.body.specialties || "",
+    education: req.body.education || "", email: req.body.email || "",
+    phone: req.body.phone || "", hours: req.body.hours || "",
+    sites: req.body.sites || ["zuglo"],
   };
   therapists.push(therapist);
   writeJSON(THERAPISTS_FILE, therapists);
   res.status(201).json(therapist);
 });
 
-app.put("/api/therapists/:slug", requireAuth, (req, res) => {
+app.put("/api/admin/therapists/:slug", requireAuth, (req, res) => {
   const therapists = readJSON(THERAPISTS_FILE);
   const idx = therapists.findIndex((t) => t.slug === req.params.slug);
   if (idx === -1) return res.status(404).json({ error: "Therapist not found" });
@@ -95,7 +125,7 @@ app.put("/api/therapists/:slug", requireAuth, (req, res) => {
   res.json(therapists[idx]);
 });
 
-app.delete("/api/therapists/:slug", requireAuth, (req, res) => {
+app.delete("/api/admin/therapists/:slug", requireAuth, (req, res) => {
   const therapists = readJSON(THERAPISTS_FILE);
   const idx = therapists.findIndex((t) => t.slug === req.params.slug);
   if (idx === -1) return res.status(404).json({ error: "Therapist not found" });
@@ -271,8 +301,55 @@ app.post("/api/social-posts/generate", requireAuth, (_req, res) => {
   });
 });
 
+// ─── Gellérthegyi social posts ────────────────────────────────────────────────
+
+app.get("/api/gellert/social-posts", (_req, res) => {
+  let posts = readJSON(GELLERT_SOCIAL_POSTS_FILE);
+  const { status } = _req.query;
+  if (status) posts = posts.filter((p) => p.status === status);
+  res.json(posts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)));
+});
+
+app.post("/api/gellert/social-posts", requireAgentKey, (req, res) => {
+  const posts = readJSON(GELLERT_SOCIAL_POSTS_FILE);
+  const post = {
+    id: randomUUID(), created_at: new Date().toISOString(),
+    type: req.body.type || "research", topic: req.body.topic || "",
+    sources: req.body.sources || [], fb_caption: req.body.fb_caption || "",
+    ig_caption: req.body.ig_caption || "", hashtags: req.body.hashtags || [],
+    image_prompt: req.body.image_prompt || "",
+    status: "pending", posted_fb_at: null, posted_ig_at: null,
+  };
+  posts.unshift(post);
+  writeJSON(GELLERT_SOCIAL_POSTS_FILE, posts);
+  res.status(201).json(post);
+});
+
+app.put("/api/gellert/social-posts/:id", requireAuth, (req, res) => {
+  const posts = readJSON(GELLERT_SOCIAL_POSTS_FILE);
+  const idx = posts.findIndex((p) => p.id === req.params.id);
+  if (idx === -1) return res.status(404).json({ error: "Post not found" });
+  posts[idx] = { ...posts[idx], ...req.body, id: req.params.id };
+  writeJSON(GELLERT_SOCIAL_POSTS_FILE, posts);
+  res.json(posts[idx]);
+});
+
+app.delete("/api/gellert/social-posts/:id", requireAuth, (req, res) => {
+  const posts = readJSON(GELLERT_SOCIAL_POSTS_FILE);
+  const idx = posts.findIndex((p) => p.id === req.params.id);
+  if (idx === -1) return res.status(404).json({ error: "Post not found" });
+  posts.splice(idx, 1);
+  writeJSON(GELLERT_SOCIAL_POSTS_FILE, posts);
+  res.status(204).end();
+});
+
 // ─── SPA fallback ─────────────────────────────────────────────────────────────
 if (existsSync(DIST_DIR)) {
+  // Gellérthegyi SPA
+  app.get("/gellert/{*path}", (_req, res) => {
+    res.sendFile(join(DIST_DIR, "gellert", "index.html"));
+  });
+  // Zuglói SPA (catch-all)
   app.get("/{*path}", (_req, res) => {
     res.sendFile(join(DIST_DIR, "index.html"));
   });

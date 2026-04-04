@@ -4,32 +4,31 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import SiteContext from "@/context/SiteContext";
-import Index from "./pages/Index.tsx";
-import Admin from "./pages/Admin.tsx";
-import TherapistDetail from "./pages/TherapistDetail.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import Index from "./pages/Index";
+import Admin from "@/pages/Admin";
+import TherapistDetail from "@/pages/TherapistDetail";
+import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const zugloConfig = {
-  key: "zuglo" as const,
-  apiBase: "/api",
-  basePath: "/",
-  therapistRoute: "/szakemberek",
+const gellertConfig = {
+  key: "gellert" as const,
+  apiBase: "/api/gellert",
+  basePath: "/gellert",
+  therapistRoute: "/gellert/szakemberek",
 };
 
 const App = () => (
-  <SiteContext.Provider value={zugloConfig}>
+  <SiteContext.Provider value={gellertConfig}>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <BrowserRouter basename="/gellert">
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/szakemberek/:slug" element={<TherapistDetail />} />
             <Route path="/admin" element={<Admin />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

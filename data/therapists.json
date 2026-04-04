@@ -9,7 +9,10 @@
     "education": "",
     "email": "toth.rubecz@gmail.com",
     "phone": "06-30/685-8229",
-    "hours": "Csütörtök 15:00-19:00, Péntek 8:00-14:00"
+    "hours": "Csütörtök 15:00-19:00, Péntek 8:00-14:00",
+    "sites": [
+      "zuglo"
+    ]
   },
   {
     "slug": "laszlo-kinga",
@@ -21,7 +24,10 @@
     "education": "",
     "email": "laszlo.kinga@proton.me",
     "phone": "",
-    "hours": "Hétfő 8:00-11:00, Péntek 8:00-13:00"
+    "hours": "Hétfő 8:00-11:00, Péntek 8:00-13:00",
+    "sites": [
+      "zuglo"
+    ]
   },
   {
     "slug": "poka-toth-barbara",
@@ -33,7 +39,10 @@
     "education": "Komplex Integratív Terapeuta képzés (folyamatban) – MAKOMP; Okleveles pszichológus (Pszichológia MA), tanácsadás és iskolapszichológia specializáció – Szegedi Tudományegyetem; Viselkedéselemző (Pszichológia BA) – Pécsi Tudományegyetem",
     "email": "pokatothbarbara@gmail.com",
     "phone": "",
-    "hours": "Kedd 13:00-17:00, Csütörtök 17:00-20:00, Péntek 15:00-19:00"
+    "hours": "Kedd 13:00-17:00, Csütörtök 17:00-20:00, Péntek 15:00-19:00",
+    "sites": [
+      "zuglo"
+    ]
   },
   {
     "slug": "redei-brigitta",
@@ -45,7 +54,10 @@
     "education": "Magyar Sématerápiás Egyesület: Sématerápiás konzultáns jelölt; Semmelweis Egyetem: CBT terapeuta; MAKOMP: Katathym Imaginatív Pszichoterápia; Debreceni Egyetem: Egészségpszichológus MSc; Szegedi Tudományegyetem: Viselkedéselemző / Pszichológia BA",
     "email": "brigitta.redei@gmail.com",
     "phone": "",
-    "hours": "Csütörtök 8:00-13:00"
+    "hours": "Csütörtök 8:00-13:00",
+    "sites": [
+      "zuglo"
+    ]
   },
   {
     "slug": "csanyi-nikoletta",
@@ -57,7 +69,10 @@
     "education": "",
     "email": "csanyi.nikoletta.2011@gmail.com",
     "phone": "",
-    "hours": "Péntek 14:00-20:00, Szombat 10:00-14:00"
+    "hours": "Péntek 14:00-20:00, Szombat 10:00-14:00",
+    "sites": [
+      "zuglo"
+    ]
   },
   {
     "slug": "padanyi-p-orsolya",
@@ -69,7 +84,10 @@
     "education": "",
     "email": "",
     "phone": "",
-    "hours": "Hétfő 9:00-14:00, Szerda 9:00-12:00, Csütörtök 8:00-14:00"
+    "hours": "Hétfő 9:00-14:00, Szerda 9:00-12:00, Csütörtök 8:00-14:00",
+    "sites": [
+      "zuglo"
+    ]
   },
   {
     "slug": "fejes-judit-anna",
@@ -81,7 +99,10 @@
     "education": "",
     "email": "fejes.judit.anna.pszichologus@gmail.com",
     "phone": "",
-    "hours": "Péntek 11:00-15:00"
+    "hours": "Péntek 11:00-15:00",
+    "sites": [
+      "zuglo"
+    ]
   },
   {
     "slug": "laczko-laura",
@@ -93,7 +114,10 @@
     "education": "",
     "email": "gendalor@gmail.com",
     "phone": "",
-    "hours": "Kedd 13:00-20:00, Szerda 15:00-20:00, Szombat 9:00-14:00"
+    "hours": "Kedd 13:00-20:00, Szerda 15:00-20:00, Szombat 9:00-14:00",
+    "sites": [
+      "zuglo"
+    ]
   },
   {
     "slug": "erdelyi-balazs-szabina",
@@ -105,7 +129,10 @@
     "education": "Tanácsadó szakpszichológus krízistanácsadás specializációval – ELTE PPK; Okleveles pszichológus tanácsadás és iskolapszichológia szakiránnyal – ELTE PPK; Családterápiás képzés (folyamatban) – Magyar Családterápiás Egyesület",
     "email": "balazsszabina.pszi@gmail.com",
     "phone": "",
-    "hours": "Péntek 8:00-11:00, 15:00-19:00"
+    "hours": "Péntek 8:00-11:00, 15:00-19:00",
+    "sites": [
+      "zuglo"
+    ]
   },
   {
     "slug": "koteles-anna",
@@ -117,7 +144,10 @@
     "education": "",
     "email": "",
     "phone": "",
-    "hours": "Hétfő 16:00-20:00"
+    "hours": "Hétfő 16:00-20:00",
+    "sites": [
+      "zuglo"
+    ]
   },
   {
     "slug": "szeman-anita",
@@ -129,7 +159,10 @@
     "education": "",
     "email": "pszichologus.szemananita@gmail.com",
     "phone": "",
-    "hours": "Szerda 14:00-20:00"
+    "hours": "Szerda 14:00-20:00",
+    "sites": [
+      "zuglo"
+    ]
   },
   {
     "slug": "szucs-bence",
@@ -141,7 +174,10 @@
     "education": "",
     "email": "",
     "phone": "",
-    "hours": "Csütörtök 17:00-20:00"
+    "hours": "Csütörtök 17:00-20:00",
+    "sites": [
+      "zuglo"
+    ]
   },
   {
     "slug": "lukacs-dora",
@@ -153,7 +189,10 @@
     "education": "",
     "email": "lukacs.dora.klinpszi@gmail.com",
     "phone": "",
-    "hours": "Szerda 8:00-12:00, 16:00-20:00"
+    "hours": "Szerda 8:00-12:00, 16:00-20:00",
+    "sites": [
+      "zuglo"
+    ]
   },
   {
     "slug": "bartok-luca",
@@ -165,7 +204,10 @@
     "education": "Okleveles pszichológus, fejlődés- és klinikai gyermekpszichológia szakiránnyal – ELTE PPK; Integrált szülő-csecsemő konzultáció – Semmelweis Egyetem EKK Mentálhigiéné Intézet; Családterápiás képzés (elméleti fázis) – Magyar Családterápiás Egyesület",
     "email": "bartokluca.pszicho@gmail.com",
     "phone": "",
-    "hours": "Szerda 8:00-14:00"
+    "hours": "Szerda 8:00-14:00",
+    "sites": [
+      "zuglo"
+    ]
   },
   {
     "slug": "ribiczey-nora",
@@ -177,6 +219,99 @@
     "education": "Integrált szülő-csecsemő/kisgyermek konzulens – SOTE; Pedagógiai szakpszichológus (óvoda- és iskolapszichológus) – ELTE PPK; Pszichodráma asszisztens – Magyar Pszichodráma Egyesület; PhD fokozat – ELTE Pszichológiatudományi Doktori Iskola; Okleveles pszichológus és pszichológia szakos tanár – ELTE BTK",
     "email": "nribiczey@gmail.com",
     "phone": "",
-    "hours": "Hétfő 14:00-19:00, Kedd 8:00-12:00, Csütörtök 9:00-18:00"
+    "hours": "Hétfő 14:00-19:00, Kedd 8:00-12:00, Csütörtök 9:00-18:00",
+    "sites": [
+      "zuglo"
+    ]
+  },
+  {
+    "slug": "martonicz-andrea",
+    "name": "Martonicz Andrea",
+    "title": "Felnőtt klinikai szakpszichológus, pszichoterapeuta",
+    "image": "",
+    "description": "Több mint 15 éves klinikai tapasztalattal rendelkezem. Pszichodinamikus szemléletben dolgozom: az analitikus pszichoterápia kereteit felhasználva az öntudatlan érzések, vágyak és motivációk megértésén és feldolgozásán keresztül segítem a pácienseket. A jelen pillanat érzéseire és a terápiás kapcsolatra nagy hangsúlyt fektetek.",
+    "specialties": "Szorongásos tünetek, depresszió, pszichodinamikus terápia, analitikus pszichoterápia",
+    "education": "Pszichológus diploma – ELTE PPK;Felnőtt klinikai és mentálhigiéniai szakpszichológus – Pécsi Tudományegyetem;Analitikusan orientált önismereti analízis – Magyar Pszichoanalitikus Egyesület;Tündérhegyi Európai Pszichoterápiás Képzés – OORI;Alap- és technikai szemináriumok – Magyar Pszichoanalitikus Egyesület",
+    "email": "andrea@andreamartonicz.com",
+    "phone": "+36 30 414 00 29",
+    "hours": "Hétfő és Csütörtök 9:00–15:00 (bejelentkezés)",
+    "sites": [
+      "gellert"
+    ]
+  },
+  {
+    "slug": "szabo-judit",
+    "name": "Szabó Judit",
+    "title": "Klinikai szakpszichológus, pszichoterapeuta",
+    "image": "",
+    "description": "1984 óta pszichológusként dolgozom, integrált szemlélettel, a személyiség fejlődési potenciáljának kibontakoztatását helyezve előtérbe. Érdeklődési területeim: természettudományok, társadalomtudományok, művészetek, filozófia és kulturális antropológia.",
+    "specialties": "Szorongásoldás, feltáró pszichoterápia, pszichoszomatikus tünetek, autogén tréning",
+    "education": "Pszichológus – ELTE BTK;Klinikai pszichológus – Orvostovábbképző Intézet;Pszichoterapeuta – Orvostovábbképző Egyetem;Autogén tréning, csoportpszichoterápia, ericksonos hipnoterápia, pszichoanalitikus pszichoterápia, pszichodráma, szervezetfejlesztés, coaching",
+    "email": "lajtorjas.szabo.judit@gmail.com",
+    "phone": "+36 30 414 00 29",
+    "hours": "Egyéni megbeszélés szerint",
+    "sites": [
+      "gellert"
+    ]
+  },
+  {
+    "slug": "markos-eva",
+    "name": "Márkos Éva",
+    "title": "Felnőtt klinikai szakpszichológus",
+    "image": "",
+    "description": "Felnőtt klinikai szakpszichológusként felnőtt páciensek egyéni terápiájával és pszichodiagnosztikával foglalkozom.",
+    "specialties": "Egyéni terápia, pszichodiagnosztika, felnőtt klinikai pszichológia",
+    "education": "",
+    "email": "",
+    "phone": "+36 30 414 00 29",
+    "hours": "Egyéni megbeszélés szerint",
+    "sites": [
+      "gellert"
+    ]
+  },
+  {
+    "slug": "havasi-kriszta",
+    "name": "Havasi Kriszta",
+    "title": "Tanácsadó szakpszichológus-jelölt, képzésben lévő pár- és családterapeuta",
+    "image": "",
+    "description": "Több mint egy évtizedes HR-tapasztalatomat hozom a terápiás munkába. Megközelítésem integrálja a relaxációt, a mindfulnesst, a kognitív-viselkedésterápiás technikákat, a coachingot és a sématerápiás elemeket.",
+    "specialties": "Karrier- és munkahelyi nehézségek, stresszkezelés, kapcsolati problémák, önismeret, kiégés, reziliencia",
+    "education": "Tanácsadó szakpszichológus képzés – Eötvös József Katolikus Egyetem;Sémakonzulens képzés – Magyar Sématerápiás Egyesület;Pár- és családterapeuta képzés – Magyar Családterápiás Egyesület;Coach képesítés – Legacy Kft.;Pszichodráma asszisztens – Magyar Pszichodráma Egyesület;Pszichológus (munka- és szervezetpszichológia) – Eötvös József KE és BME",
+    "email": "hello@havasikriszta.hu",
+    "phone": "+36 30 414 00 29",
+    "hours": "Egyéni megbeszélés szerint",
+    "sites": [
+      "gellert"
+    ]
+  },
+  {
+    "slug": "krausz-ivett",
+    "name": "Krausz Ivett",
+    "title": "Tanácsadó szakpszichológus, autogén tréning gyakorlatvezető",
+    "image": "",
+    "description": "Tanácsadó szakpszichológusként és autogén tréning gyakorlatvezetőként segítem klienseimet a stresszkezelésben, önismeretben és személyes fejlődésben.",
+    "specialties": "Tanácsadás, autogén tréning, stresszkezelés, önismeret",
+    "education": "",
+    "email": "",
+    "phone": "+36 30 414 00 29",
+    "hours": "Egyéni megbeszélés szerint",
+    "sites": [
+      "gellert"
+    ]
+  },
+  {
+    "slug": "szili-nora",
+    "name": "Szili Nóra",
+    "title": "Okleveles pszichológus, integratív terapeuta-jelölt",
+    "image": "",
+    "description": "Személyközpontú szemléletben dolgozom, bizalomteli légkört teremtve, hogy klienseim szabadon feltárják belső erőforrásaikat. Munkahelyi és karrierkihívások, kapcsolati nehézségek, önbizalom és reziliencia fejlesztése területén nyújtok segítséget.",
+    "specialties": "Életvezetési tanácsadás, katatím imaginatív terápia, kapcsolati problémák, stresszkezelés, karriertanácsadás",
+    "education": "Okleveles pszichológus – Pécsi Tudományegyetem, BME;Integratív terapeuta képzés – Magyar Komplex Pszichoterápiás Egyesület;Katatím imaginatív pszichoterápia – Magyar Komplex Pszichoterápiás Egyesület",
+    "email": "szilinora@gmail.com",
+    "phone": "+36-30/195-5387",
+    "hours": "Szerda délelőtt, Péntek délután",
+    "sites": [
+      "gellert"
+    ]
   }
 ]

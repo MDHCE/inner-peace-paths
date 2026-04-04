@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Pencil, Trash2, Plus, ArrowLeft, Send, X, RefreshCw, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useSite } from "@/context/SiteContext";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -19,6 +20,7 @@ interface Therapist {
   email: string;
   phone: string;
   hours: string;
+  sites: string[];
 }
 
 interface SocialPost {
@@ -49,6 +51,12 @@ const emptyTherapist: Therapist = {
   email: "",
   phone: "",
   hours: "",
+  sites: ["zuglo"],
+};
+
+const SITE_LABELS: Record<string, string> = {
+  zuglo: "Zuglói Pszichológiai Központ",
+  gellert: "Gellérthegyi Rendelő",
 };
 
 const TYPE_LABELS: Record<SocialPost["type"], string> = {
@@ -74,6 +82,7 @@ const STATUS_LABELS: Record<SocialPost["status"], string> = {
 // ── Admin ─────────────────────────────────────────────────────────────────────
 
 const Admin = () => {
+  const { apiBase } = useSite();
   const [tab, setTab] = useState<"therapists" | "posts">("therapists");
 
   // ── Therapists state ──────────────────────────────────────────────────────
@@ -81,6 +90,7 @@ const Admin = () => {
   const [editing, setEditing] = useState<Therapist | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [siteFilter, setSiteFilter] = useState("");
 
   // ── Posts state ───────────────────────────────────────────────────────────
   const [posts, setPosts] = useState<SocialPost[]>([]);
@@ -96,13 +106,13 @@ const Admin = () => {
   // ── Fetch ─────────────────────────────────────────────────────────────────
 
   const fetchTherapists = () =>
-    fetch("/api/therapists")
+    fetch("/api/admin/therapists")
       .then((r) => r.json())
       .then(setTherapists)
       .catch(() => {});
 
   const fetchPosts = () =>
-    fetch(`/api/social-posts?status=${statusFilter}`)
+    fetch(`${apiBase}/social-posts?status=${statusFilter}`)
       .then((r) => r.json())
       .then(setPosts)
       .catch(() => {});
@@ -115,7 +125,7 @@ const Admin = () => {
   const handleSave = async () => {
     if (!editing) return;
     setSaving(true);
-    const url = isNew ? "/api/therapists" : `/api/therapists/${editing.slug}`;
+    const url = isNew ? "/api/admin/therapists" : `/api/admin/therapists/${editing.slug}`;
     const method = isNew ? "POST" : "PUT";
     const res = await fetch(url, {
       method,
@@ -132,7 +142,7 @@ const Admin = () => {
 
   const handleDelete = async (slug: string) => {
     if (!confirm(`Törli a szakembert: "${slug}"?`)) return;
-    const res = await fetch(`/api/therapists/${slug}`, { method: "DELETE" });
+    const res = await fetch(`/api/admin/therapists/${slug}`, { method: "DELETE" });
     if (res.ok) fetchTherapists();
   };
 
@@ -140,7 +150,7 @@ const Admin = () => {
 
   const handleSavePost = async () => {
     if (!editingPost) return;
-    const res = await fetch(`/api/social-posts/${editingPost.id}`, {
+    const res = await fetch(`${apiBase}/social-posts/${editingPost.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -158,7 +168,7 @@ const Admin = () => {
   };
 
   const handleReject = async (id: string) => {
-    await fetch(`/api/social-posts/${id}`, {
+    await fetch(`${apiBase}/social-posts/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: "rejected" }),
@@ -174,7 +184,7 @@ const Admin = () => {
     const body: Record<string, unknown> = { platforms };
     if (publishImageUrl) body.image_url = publishImageUrl;
 
-    const res = await fetch(`/api/social-posts/${post.id}/post`, {
+    const res = await fetch(`${apiBase}/social-posts/${post.id}/post`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -191,7 +201,7 @@ const Admin = () => {
 
   const handleGenerate = async () => {
     setGenerating(true);
-    const res = await fetch("/api/social-posts/generate", { method: "POST" });
+    const res = await fetch(`${apiBase}/social-posts/generate`, { method: "POST" });
     setGenerating(false);
     if (res.ok) {
       fetchPosts();
@@ -203,7 +213,7 @@ const Admin = () => {
 
   const handleDeletePost = async (id: string) => {
     if (!confirm("Törli ezt a bejegyzést?")) return;
-    await fetch(`/api/social-posts/${id}`, { method: "DELETE" });
+    await fetch(`${apiBase}/social-posts/${id}`, { method: "DELETE" });
     fetchPosts();
   };
 
@@ -257,11 +267,28 @@ const Admin = () => {
         {/* ── THERAPISTS TAB ───────────────────────────────────────────────── */}
         {tab === "therapists" && (
           <>
-            {/* Add button */}
-            <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-foreground">
-                Szakembereink ({therapists.length})
-              </h2>
+            {/* Add button + site filter */}
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <h2 className="text-lg font-semibold text-foreground">
+                  Szakemberek ({therapists.length})
+                </h2>
+                <div className="flex gap-2">
+                  {["", "zuglo", "gellert"].map((f) => (
+                    <button
+                      key={f}
+                      onClick={() => setSiteFilter(f)}
+                      className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                        siteFilter === f
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-accent text-accent-foreground hover:bg-accent/80"
+                      }`}
+                    >
+                      {f === "" ? "Összes" : SITE_LABELS[f]}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <Button
                 onClick={() => {
                   setEditing({ ...emptyTherapist });
@@ -328,7 +355,33 @@ const Admin = () => {
                       <Input value={editing.hours} onChange={(e) => setEditing({ ...editing, hours: e.target.value })} placeholder="pl. Hétfő 9:00-14:00" />
                     </div>
                   </div>
-                  <div className="flex gap-3 pt-2">
+                  {/* Sites checkboxes */}
+              <div>
+                <label className="mb-2 block text-xs uppercase tracking-wider text-muted-foreground">Megjelenés</label>
+                <div className="flex gap-6">
+                  {Object.entries(SITE_LABELS).map(([key, label]) => (
+                    <label key={key} className="flex items-center gap-2 text-sm cursor-pointer select-none">
+                      <input
+                        type="checkbox"
+                        checked={(editing.sites || []).includes(key)}
+                        onChange={(e) => {
+                          const sites = editing.sites || [];
+                          setEditing({
+                            ...editing,
+                            sites: e.target.checked
+                              ? [...sites, key]
+                              : sites.filter((s) => s !== key),
+                          });
+                        }}
+                        className="w-4 h-4"
+                      />
+                      {label}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex gap-3 pt-2">
                     <Button onClick={handleSave} size="sm" disabled={saving}>{saving ? "Mentés..." : "Mentés"}</Button>
                     <Button onClick={() => { setEditing(null); setIsNew(false); }} variant="outline" size="sm">Mégse</Button>
                   </div>
@@ -338,7 +391,9 @@ const Admin = () => {
 
             {/* List */}
             <div className="space-y-3">
-              {therapists.map((t) => (
+              {therapists
+                .filter((t) => !siteFilter || (t.sites || []).includes(siteFilter))
+                .map((t) => (
                 <Card key={t.slug} className="border-border">
                   <CardContent className="flex items-center justify-between p-4">
                     <div className="flex items-center gap-4">
@@ -350,6 +405,15 @@ const Admin = () => {
                       <div>
                         <p className="font-semibold text-foreground">{t.name}</p>
                         <p className="text-xs text-muted-foreground">{t.title}</p>
+                        <div className="flex gap-1 mt-1">
+                          {(t.sites || []).map((s) => (
+                            <span key={s} className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                              s === "zuglo" ? "bg-blue-100 text-blue-700" : "bg-green-100 text-green-700"
+                            }`}>
+                              {s === "zuglo" ? "Zugló" : "Gellért"}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                     <div className="flex gap-2">
@@ -363,8 +427,8 @@ const Admin = () => {
                   </CardContent>
                 </Card>
               ))}
-              {therapists.length === 0 && (
-                <p className="py-8 text-center text-muted-foreground">Még nincsenek szakemberek felvéve.</p>
+              {therapists.filter((t) => !siteFilter || (t.sites || []).includes(siteFilter)).length === 0 && (
+                <p className="py-8 text-center text-muted-foreground">Nincs szakember ebben a szűrőben.</p>
               )}
             </div>
           </>

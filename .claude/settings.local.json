@@ -19,7 +19,13 @@
       "Bash(grep -r \"react-helmet\\\\|helmet\\\\|Helmet\" /d/GitHub/inner-peace-paths/src --include=*.tsx --include=*.ts)",
       "Bash(find /d/GitHub/inner-peace-paths/public -type f -exec ls -lh {})",
       "Bash(2)",
-      "Bash(node -e \"const d=JSON.parse\\(require\\(''fs''\\).readFileSync\\(''data/therapists.json'',''utf8''\\)\\); d.forEach\\(t=>console.log\\(t.slug\\)\\)\")"
+      "Bash(node -e \"const d=JSON.parse\\(require\\(''fs''\\).readFileSync\\(''data/therapists.json'',''utf8''\\)\\); d.forEach\\(t=>console.log\\(t.slug\\)\\)\")",
+      "WebFetch(domain:budapest-healing-haven.lovable.app)",
+      "WebFetch(domain:www.gellerthegyirendelo.hu)",
+      "Bash(curl -L \"https://www.gellerthegyirendelo.hu/wp-content/uploads/2018/08/logo_final-300x73.png\" -o \"D:\\\\GitHub\\\\inner-peace-paths\\\\src\\\\assets\\\\gellert-logo.png\")",
+      "Bash(node -e \":*)",
+      "Bash(python -c \"from PIL import Image; img = Image.open\\(''src/assets/gellert-logo.png''\\); print\\(img.size, img.mode\\)\")",
+      "Bash(python scripts/process_gellert_logo.py)"
     ]
   }
 }

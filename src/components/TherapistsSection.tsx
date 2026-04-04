@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Clock, User, ArrowRight } from "lucide-react";
+import { useSite } from "@/context/SiteContext";
 
 interface Therapist {
   slug: string;
@@ -26,10 +27,11 @@ const item = {
 };
 
 const TherapistsSection = () => {
+  const { apiBase, therapistRoute } = useSite();
   const [therapists, setTherapists] = useState<Therapist[]>([]);
 
   useEffect(() => {
-    fetch("/api/therapists")
+    fetch(`${apiBase}/therapists`)
       .then((r) => r.json())
       .then(setTherapists)
       .catch(() => {});
@@ -97,7 +99,7 @@ const TherapistsSection = () => {
                 </p>
 
                 <Link
-                  to={`/szakemberek/${t.slug}`}
+                  to={`${therapistRoute}/${t.slug}`}
                   className="inline-flex items-center gap-2 text-primary text-sm font-medium hover:gap-3 transition-all"
                 >
                   Bővebben

@@ -12,7 +12,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "server": "node server.js",
-    "agent": "python agents/social_agent.py"
+    "agent": "python agents/social_agent.py",
+    "dev:gellert": "vite --open /gellert/"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
