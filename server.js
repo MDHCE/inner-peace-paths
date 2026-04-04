@@ -63,6 +63,7 @@ app.post("/api/therapists", requireAuth, (req, res) => {
     image: req.body.image || "",
     description: req.body.description || "",
     specialties: req.body.specialties || "",
+    education: req.body.education || "",
     email: req.body.email || "",
     phone: req.body.phone || "",
     hours: req.body.hours || "",

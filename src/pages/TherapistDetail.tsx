@@ -12,6 +12,7 @@ interface Therapist {
   image: string;
   description: string;
   specialties: string;
+  education: string;
   email: string;
   phone: string;
   hours: string;
@@ -141,6 +142,23 @@ const TherapistDetail = () => {
                     <p className="text-foreground text-lg leading-relaxed">
                       {therapist.description}
                     </p>
+                  </div>
+                )}
+
+                {/* Education */}
+                {therapist.education && (
+                  <div className="mb-8">
+                    <h2 className="text-sm uppercase tracking-[0.2em] text-muted-foreground font-medium mb-3">
+                      Végzettség
+                    </h2>
+                    <ul className="space-y-2">
+                      {therapist.education.split(";").map((e) => (
+                        <li key={e.trim()} className="flex items-start gap-2 text-foreground">
+                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                          <span>{e.trim()}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 )}
 

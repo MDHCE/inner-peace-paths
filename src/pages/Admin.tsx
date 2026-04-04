@@ -13,6 +13,7 @@ interface Therapist {
   image: string;
   description: string;
   specialties: string;
+  education: string;
   email: string;
   phone: string;
   hours: string;
@@ -25,6 +26,7 @@ const emptyTherapist: Therapist = {
   image: "",
   description: "",
   specialties: "",
+  education: "",
   email: "",
   phone: "",
   hours: "",
@@ -174,6 +176,19 @@ const Admin = () => {
                     setEditing({ ...editing, specialties: e.target.value })
                   }
                   placeholder="pl. Sématerápia, családterápia, EMDR"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-xs uppercase tracking-wider text-muted-foreground">
+                  Végzettség (pontosvesszővel elválasztva)
+                </label>
+                <Textarea
+                  value={editing.education}
+                  onChange={(e) =>
+                    setEditing({ ...editing, education: e.target.value })
+                  }
+                  placeholder="pl. Okleveles pszichológus – ELTE PPK; Sématerápiás konzultáns – MSE"
+                  rows={3}
                 />
               </div>
               <div className="grid gap-4 md:grid-cols-2">

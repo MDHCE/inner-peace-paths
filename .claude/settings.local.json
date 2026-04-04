@@ -4,7 +4,9 @@
       "Bash(npm run:*)",
       "Bash(npm install:*)",
       "Bash(node server.js)",
-      "Bash(curl -s http://localhost:3001/api/therapists)"
+      "Bash(curl -s http://localhost:3001/api/therapists)",
+      "Bash(powershell.exe -NoProfile -Command \":*)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(f''''{len\\(d\\)} therapists loaded''''\\); [print\\(f\"\"  - {t[''''name'''']}\"\"\\) for t in d]\")"
     ]
   }
 }
