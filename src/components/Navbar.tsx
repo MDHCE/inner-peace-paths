@@ -6,6 +6,7 @@ import logoImg from "@/assets/zugloi-logo.png";
 const navLinks = [
   { label: "Főoldal", href: "#hero" },
   { label: "Szolgáltatások", href: "#szolgaltatasok" },
+  { label: "Szakembereink", href: "#szakembereink" },
   { label: "Rólunk", href: "#rolunk" },
   { label: "Kapcsolat", href: "#kapcsolat" },
 ];

@@ -1,0 +1,145 @@
+[
+  {
+    "slug": "toth-orsolya",
+    "name": "Tóth Orsolya",
+    "title": "Tanácsadó szakpszichológus, pszichodráma vezető",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2021/08/Tóth_Orsi.jpg",
+    "description": "Sokéves tapasztalatom van egyéni és csoportos pszichológiai tanácsadói helyzetekben. Életvezetési tanácsadással, család- és kapcsolati problémákkal, pszichodrámával foglalkozom.",
+    "specialties": "Életvezetési tanácsadás, család- és kapcsolati problémák, pszichodráma",
+    "email": "toth.rubecz@gmail.com",
+    "phone": "06-30/685-8229",
+    "hours": "Csütörtök 15:00-19:00, Péntek 8:00-14:00"
+  },
+  {
+    "slug": "laszlo-kinga",
+    "name": "László Kinga",
+    "title": "Tanácsadó szakpszichológus",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2022/10/IMG_0664-Copy-2.jpg",
+    "description": "Krízisintervenció, sématerápia és imaginatív pszichoterápia területén dolgozom. Segítek az életkrízisek és nehéz átmenetek feldolgozásában.",
+    "specialties": "Krízisintervenció, sématerápia, imaginatív pszichoterápia",
+    "email": "laszlo.kinga@proton.me",
+    "phone": "",
+    "hours": "Hétfő 8:00-11:00, Péntek 8:00-13:00"
+  },
+  {
+    "slug": "poka-toth-barbara",
+    "name": "Póka-Tóth Barbara",
+    "title": "Pszichológus, képzésben lévő komplex integratív terapeuta",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2025/09/P-T_Barbara_kisebb.png",
+    "description": "Olyan bizalomra és elfogadásra épülő biztonságos közeg kialakítása a célom, amelyben lehetőség nyílik a személyes fejlődésre.",
+    "specialties": "Pszichodynamikus terápia, személyközpontú terápia, személyes fejlődés",
+    "email": "pokatothbarbara@gmail.com",
+    "phone": "",
+    "hours": "Kedd 13:00-17:00, Csütörtök 17:00-20:00, Péntek 15:00-19:00"
+  },
+  {
+    "slug": "redei-brigitta",
+    "name": "Rédei Brigitta",
+    "title": "Pszichológus, kognitív viselkedésterapeuta",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2022/09/img_6057-001.jpeg",
+    "description": "A viselkedésünket és kapcsolatainkat befolyásoló tudattalan folyamatokkal foglalkozom. Kognitív viselkedésterápia, önismeret, kapcsolati minták.",
+    "specialties": "Kognitív viselkedésterápia, önismeret, kapcsolati minták",
+    "email": "brigitta.redei@gmail.com",
+    "phone": "",
+    "hours": "Csütörtök 8:00-13:00"
+  },
+  {
+    "slug": "csanyi-nikoletta",
+    "name": "Csányi Nikoletta",
+    "title": "Pedagógiai szakpszichológus",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2023/09/CSNportré.jpg",
+    "description": "Több mint 20 éves tapasztalattal rendelkezem a gyermekvédelemben, 6 évig iskolapszichológusként dolgoztam. Gyermekvédelem, nevelési pszichológia, örökbefogadás.",
+    "specialties": "Gyermekvédelem, pedagógiai pszichológia, örökbefogadás",
+    "email": "csanyi.nikoletta.2011@gmail.com",
+    "phone": "",
+    "hours": "Péntek 14:00-20:00, Szombat 10:00-14:00"
+  },
+  {
+    "slug": "padanyi-p-orsolya",
+    "name": "Padányi P. Orsolya",
+    "title": "Tanácsadó szakpszichológus, pszichodráma vezető, EMDR terapeuta-jelölt",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2021/08/OrsolyaPadanyiP_face.jpg",
+    "description": "Fontosnak tartom, hogy mindenkinek joga van belátást szerezni az életére nézve. Életvezetési tanácsadás, traumafókuszú EMDR, pszichodráma.",
+    "specialties": "Életvezetési tanácsadás, EMDR, pszichodráma, önfejlesztés",
+    "email": "",
+    "phone": "",
+    "hours": "Hétfő 9:00-14:00, Szerda 9:00-12:00, Csütörtök 8:00-14:00"
+  },
+  {
+    "slug": "fejes-judit-anna",
+    "name": "Fejes Judit Anna",
+    "title": "Pszichológus, sématerápiás konzultáns, tanácsadó-szakpszichológus jelölt",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2023/10/juditannafejes-scaled.jpg",
+    "description": "Sématerápia és élményfókuszú technikák alkalmazásával segítem a személyes fejlődést. Gyermekekkel is dolgozom kognitív viselkedésterápiás módszerekkel.",
+    "specialties": "Sématerápia, kognitív viselkedésterápia, gyermekterápia",
+    "email": "fejes.judit.anna.pszichologus@gmail.com",
+    "phone": "",
+    "hours": "Péntek 11:00-15:00"
+  },
+  {
+    "slug": "laczko-laura",
+    "name": "Laczkó Laura",
+    "title": "Pszichológus, pszichodinamikus mozgás- és táncterapeuta",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2023/11/IMG_20231102_193658.jpg",
+    "description": "Érzelmi szabályozás, bizalomépítés és identitás-felfedezés területén dolgozom. LGBTQ+ affirmatív szemlélettel.",
+    "specialties": "Pszichodinamikus terápia, mozgás- és táncterápia, LGBTQ+ affirmatív",
+    "email": "gendalor@gmail.com",
+    "phone": "",
+    "hours": "Kedd 13:00-20:00, Szerda 15:00-20:00, Szombat 9:00-14:00"
+  },
+  {
+    "slug": "erdelyi-balazs-szabina",
+    "name": "Erdélyi-Balázs Szabina",
+    "title": "Tanácsadó szakpszichológus-jelölt, képzésben lévő pár- és családterapeuta",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2021/08/Erdélyi-Balázs-Szabina_profilkép-scaled.jpg",
+    "description": "Rendszerben gondolkodom, és az egyén helyzetén túl kitekintek az őt körülvevő kapcsolati viszonyokra. Életvezetési tanácsadás, családrendszer-szemlélet.",
+    "specialties": "Életvezetési tanácsadás, családterápia, speciális szükségletek",
+    "email": "balazsszabina.pszi@gmail.com",
+    "phone": "",
+    "hours": "Péntek 8:00-11:00, 15:00-20:00"
+  },
+  {
+    "slug": "koteles-anna",
+    "name": "Köteles Anna",
+    "title": "Pszichológus, sport-szakpszichológus jelölt",
+    "image": "",
+    "description": "Sportpszichológia, autogén tréning és mentális teljesítményfokozás területén dolgozom.",
+    "specialties": "Sportpszichológia, autogén tréning, mentális teljesítmény",
+    "email": "",
+    "phone": "",
+    "hours": "Hétfő 16:00-20:00"
+  },
+  {
+    "slug": "szeman-anita",
+    "name": "Szemán Anita",
+    "title": "Felnőtt klinikai és mentálhigiéniai szakpszichológus, képzésben lévő pár- és családterapeuta",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2025/05/SZA_kep.jpg",
+    "description": "Integratív szemléletben dolgozom, ötvözöm a kognitív-viselkedésterápia elemeit. Stresszkezelés, családterápia, autogén tréning.",
+    "specialties": "Klinikai pszichológia, stresszkezelés, családterápia, autogén tréning",
+    "email": "pszichologus.szemananita@gmail.com",
+    "phone": "",
+    "hours": "Szerda 14:00-20:00"
+  },
+  {
+    "slug": "szucs-bence",
+    "name": "Szűcs Bence",
+    "title": "Pszichológus",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2021/07/bence3.png",
+    "description": "Személyközpontú és pszichodynamikus terápiával foglalkozom, álomelemzéssel és jelen pillanat fókuszú munkával.",
+    "specialties": "Személyközpontú terápia, pszichodynamikus terápia, álomelemzés",
+    "email": "",
+    "phone": "",
+    "hours": "Csütörtök 17:00-20:00"
+  },
+  {
+    "slug": "lukacs-dora",
+    "name": "Lukács Dóra",
+    "title": "Felnőtt klinikai és mentálhigiéniai szakpszichológus",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2019/11/IMG_20191015_122444.jpg",
+    "description": "A mentalizáció-alapú terápia, érzelmi szabályozás és kapcsolati tanácsadás területén dolgozom. A terápiás térben alapvetőnek tartom a bizalom meglétét.",
+    "specialties": "Mentalizáció-alapú terápia, érzelmi szabályozás, kapcsolati tanácsadás",
+    "email": "lukacs.dora.klinpszi@gmail.com",
+    "phone": "",
+    "hours": "Szerda 8:00-12:00, 16:00-20:00"
+  }
+]
