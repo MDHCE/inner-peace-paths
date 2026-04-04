@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import heroImg from "@/assets/hero-therapy.jpg";
+import logoImg from "@/assets/zugloi-logo-white.png";
 
 const heroVideo = `${import.meta.env.BASE_URL}hero-video-v4-loop.mp4?v=3`;
 
@@ -50,16 +51,19 @@ const HeroSection = () => {
           Budapest XIV. kerület
         </motion.p>
 
-        <motion.h1
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-primary-foreground leading-tight mb-6"
+          className="flex items-center justify-center gap-4 md:gap-6 mb-6"
         >
-          Zuglói Pszichológiai
-          <br />
-          <span className="font-semibold">Központ</span>
-        </motion.h1>
+          <img src={logoImg} alt="Zuglói Pszichológiai Központ logo" className="w-16 h-16 md:w-24 md:h-24 lg:w-28 lg:h-28" />
+          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-primary-foreground leading-tight text-left">
+            Zuglói Pszichológiai
+            <br />
+            <span className="font-semibold">Központ</span>
+          </h1>
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
