@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { ArrowLeft, Mail, Phone, Clock, User } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+const SITE_URL = "https://zugloipszichologiaikozpont.hu";
 
 interface Therapist {
   slug: string;
@@ -63,8 +66,44 @@ const TherapistDetail = () => {
     );
   }
 
+  const pageTitle = `${therapist.name} – ${therapist.title} | Zuglói Pszichológiai Központ`;
+  const pageDescription = therapist.description
+    ? therapist.description.slice(0, 155).trimEnd() + "…"
+    : `${therapist.name} – ${therapist.title}. Zuglói Pszichológiai Központ, Budapest XIV. kerület.`;
+  const canonicalUrl = `${SITE_URL}/szakemberek/${therapist.slug}`;
+
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: therapist.name,
+    jobTitle: therapist.title,
+    url: canonicalUrl,
+    ...(therapist.image ? { image: therapist.image.startsWith("http") ? therapist.image : `${SITE_URL}${therapist.image}` } : {}),
+    ...(therapist.email ? { email: `mailto:${therapist.email}` } : {}),
+    ...(therapist.phone ? { telephone: therapist.phone } : {}),
+    worksFor: {
+      "@type": "MedicalBusiness",
+      name: "Zuglói Pszichológiai Központ",
+      url: SITE_URL,
+    },
+    knowsAbout: therapist.specialties ? therapist.specialties.split(",").map((s) => s.trim()) : [],
+  };
+
   return (
     <>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="profile" />
+        {therapist.image && therapist.image.startsWith("http") && (
+          <meta property="og:image" content={therapist.image} />
+        )}
+        <script type="application/ld+json">{JSON.stringify(personSchema)}</script>
+      </Helmet>
       <Navbar />
       <main className="pt-16">
         <section className="py-16 lg:py-24">
