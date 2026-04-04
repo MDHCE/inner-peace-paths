@@ -6,7 +6,16 @@
       "Bash(node server.js)",
       "Bash(curl -s http://localhost:3001/api/therapists)",
       "Bash(powershell.exe -NoProfile -Command \":*)",
-      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(f''''{len\\(d\\)} therapists loaded''''\\); [print\\(f\"\"  - {t[''''name'''']}\"\"\\) for t in d]\")"
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(f''''{len\\(d\\)} therapists loaded''''\\); [print\\(f\"\"  - {t[''''name'''']}\"\"\\) for t in d]\")",
+      "Bash(python3 -c \"import cv2, PIL, numpy; print\\(''ok''\\)\")",
+      "Bash(python3 -c \"import PIL, numpy; print\\(''ok''\\)\")",
+      "Bash(python3 -c \"from rembg import remove; print\\(''rembg ok''\\)\")",
+      "Bash(pip3 install:*)",
+      "Bash(python3 -c \"import cv2, PIL, numpy, rembg; print\\(''all ok''\\)\")",
+      "Bash(python3 scripts/unify_photos.py)",
+      "Bash(pip install:*)",
+      "Bash(python3 scripts/unify_photos_rembg.py)",
+      "Bash(npx tsc:*)"
     ]
   }
 }
