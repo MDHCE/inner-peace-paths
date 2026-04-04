@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoImg from "@/assets/gellert-logo-dark.png";
+import logoImg from "@/assets/gellert-logo-full-dark.png";
 
 const navLinks = [
   { label: "Főoldal", href: "#hero" },
@@ -28,7 +28,7 @@ const Navbar = () => {
           onClick={() => scrollTo("#hero")}
           className="flex items-center gap-2.5"
         >
-          <img src={logoImg} alt="Gellérthegyi Pszichológiai Rendelő" className="h-9 w-auto" />
+          <img src={logoImg} alt="Gellérthegyi Pszichológiai Rendelő" className="h-10 w-auto" />
         </button>
 
         {/* Desktop */}

@@ -25,7 +25,10 @@
       "Bash(curl -L \"https://www.gellerthegyirendelo.hu/wp-content/uploads/2018/08/logo_final-300x73.png\" -o \"D:\\\\GitHub\\\\inner-peace-paths\\\\src\\\\assets\\\\gellert-logo.png\")",
       "Bash(node -e \":*)",
       "Bash(python -c \"from PIL import Image; img = Image.open\\(''src/assets/gellert-logo.png''\\); print\\(img.size, img.mode\\)\")",
-      "Bash(python scripts/process_gellert_logo.py)"
+      "Bash(python scripts/process_gellert_logo.py)",
+      "Bash(curl -s http://localhost:3001/api/admin/therapists)",
+      "Bash(npx kill-port:*)",
+      "Bash(Start-Process -NoNewWindow node -ArgumentList \"server.js\")"
     ]
   }
 }

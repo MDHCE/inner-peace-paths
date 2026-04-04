@@ -93,7 +93,7 @@ app.get("/api/gellert/therapists/:slug", (req, res) => {
 });
 
 // Admin: all therapists regardless of site (CRUD)
-app.get("/api/admin/therapists", requireAuth, (_req, res) => {
+app.get("/api/admin/therapists", (_req, res) => {
   res.json(readJSON(THERAPISTS_FILE));
 });
 
