@@ -19,10 +19,14 @@ const app = express();
 app.use(express.json());
 
 // --- Auth: reverse-proxy user (admin UI write ops) ---
+// In production, we expect a reverse proxy (Cloudflare Access / Pomerium / etc.) to inject
+// the x-forwarded-user header. In development, we allow bypass so admin operations work
+// when running `npm run server` locally without a proxy.
 function requireAuth(req, res, next) {
   const user = req.headers["x-forwarded-user"] || req.headers["x-forwarded-preferred-username"];
-  if (!user) return res.status(401).json({ error: "Unauthorized" });
-  next();
+  if (user) return next();
+  if (process.env.NODE_ENV !== "production") return next();
+  return res.status(401).json({ error: "Unauthorized" });
 }
 
 // --- Auth: agent key (social agent POST) ---
@@ -109,6 +113,7 @@ app.post("/api/admin/therapists", requireAuth, (req, res) => {
     description: req.body.description || "", specialties: req.body.specialties || "",
     education: req.body.education || "", email: req.body.email || "",
     phone: req.body.phone || "", hours: req.body.hours || "",
+    audience: req.body.audience || "adult",
     sites: req.body.sites || ["zuglo"],
   };
   therapists.push(therapist);

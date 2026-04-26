@@ -20,6 +20,7 @@ interface Therapist {
   email: string;
   phone: string;
   hours: string;
+  audience: "adult" | "child" | "both";
   sites: string[];
 }
 
@@ -51,7 +52,14 @@ const emptyTherapist: Therapist = {
   email: "",
   phone: "",
   hours: "",
+  audience: "adult",
   sites: ["zuglo"],
+};
+
+const AUDIENCE_LABELS: Record<Therapist["audience"], string> = {
+  adult: "Felnőttek",
+  child: "Gyermekek és serdülők",
+  both: "Mindkettő",
 };
 
 const SITE_LABELS: Record<string, string> = {
@@ -136,6 +144,9 @@ const Admin = () => {
       fetchTherapists();
       setEditing(null);
       setIsNew(false);
+    } else {
+      const msg = await res.json().catch(() => ({}));
+      alert(`Mentés sikertelen (${res.status}): ${msg.error || res.statusText}`);
     }
     setSaving(false);
   };
@@ -143,7 +154,12 @@ const Admin = () => {
   const handleDelete = async (slug: string) => {
     if (!confirm(`Törli a szakembert: "${slug}"?`)) return;
     const res = await fetch(`/api/admin/therapists/${slug}`, { method: "DELETE" });
-    if (res.ok) fetchTherapists();
+    if (res.ok) {
+      fetchTherapists();
+    } else {
+      const msg = await res.json().catch(() => ({}));
+      alert(`Törlés sikertelen (${res.status}): ${msg.error || res.statusText}`);
+    }
   };
 
   // ── Post handlers ─────────────────────────────────────────────────────────
@@ -355,7 +371,26 @@ const Admin = () => {
                       <Input value={editing.hours} onChange={(e) => setEditing({ ...editing, hours: e.target.value })} placeholder="pl. Hétfő 9:00-14:00" />
                     </div>
                   </div>
-                  {/* Sites checkboxes */}
+                  {/* Audience radio */}
+              <div>
+                <label className="mb-2 block text-xs uppercase tracking-wider text-muted-foreground">Célcsoport</label>
+                <div className="flex flex-wrap gap-4">
+                  {(Object.entries(AUDIENCE_LABELS) as [Therapist["audience"], string][]).map(([key, label]) => (
+                    <label key={key} className="flex items-center gap-2 text-sm cursor-pointer select-none">
+                      <input
+                        type="radio"
+                        name="audience"
+                        checked={(editing.audience || "adult") === key}
+                        onChange={() => setEditing({ ...editing, audience: key })}
+                        className="w-4 h-4"
+                      />
+                      {label}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Sites checkboxes */}
               <div>
                 <label className="mb-2 block text-xs uppercase tracking-wider text-muted-foreground">Megjelenés</label>
                 <div className="flex gap-6">
@@ -405,7 +440,7 @@ const Admin = () => {
                       <div>
                         <p className="font-semibold text-foreground">{t.name}</p>
                         <p className="text-xs text-muted-foreground">{t.title}</p>
-                        <div className="flex gap-1 mt-1">
+                        <div className="flex gap-1 mt-1 flex-wrap">
                           {(t.sites || []).map((s) => (
                             <span key={s} className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
                               s === "zuglo" ? "bg-blue-100 text-blue-700" : "bg-green-100 text-green-700"
@@ -413,6 +448,15 @@ const Admin = () => {
                               {s === "zuglo" ? "Zugló" : "Gellért"}
                             </span>
                           ))}
+                          {t.audience && (
+                            <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                              t.audience === "adult" ? "bg-amber-100 text-amber-800" :
+                              t.audience === "child" ? "bg-pink-100 text-pink-800" :
+                              "bg-purple-100 text-purple-800"
+                            }`}>
+                              {AUDIENCE_LABELS[t.audience]}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>

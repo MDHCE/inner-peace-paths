@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Shield, Award, Clock } from "lucide-react";
 
 const highlights = [
-  { icon: Shield, label: "ÁNTSZ engedély", value: "513289" },
+  { icon: Shield, label: "NEAK szám", value: "513289" },
   { icon: Award, label: "Szakmai tapasztalat", value: "15+ év" },
   { icon: Clock, label: "Nyitvatartás", value: "H-P 8-20, Sz 8-15" },
 ];

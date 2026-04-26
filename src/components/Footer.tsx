@@ -33,7 +33,7 @@ const Footer = () => (
       </div>
       <div className="border-t border-primary-foreground/10 pt-6 text-center text-sm">
         <p>© {new Date().getFullYear()} Zuglói Pszichológiai Központ. Minden jog fenntartva.</p>
-        <p className="mt-1">ÁNTSZ működési engedély: 513289</p>
+        <p className="mt-1">NEAK szám: 513289</p>
       </div>
     </div>
   </footer>

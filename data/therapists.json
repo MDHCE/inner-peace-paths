@@ -10,6 +10,7 @@
     "email": "toth.rubecz@gmail.com",
     "phone": "06-30/685-8229",
     "hours": "Csütörtök 15:00-19:00, Péntek 8:00-14:00",
+    "audience": "adult",
     "sites": [
       "zuglo"
     ]
@@ -25,6 +26,7 @@
     "email": "laszlo.kinga@proton.me",
     "phone": "",
     "hours": "Hétfő 8:00-11:00, Péntek 8:00-13:00",
+    "audience": "adult",
     "sites": [
       "zuglo"
     ]
@@ -40,6 +42,7 @@
     "email": "pokatothbarbara@gmail.com",
     "phone": "",
     "hours": "Kedd 13:00-17:00, Csütörtök 17:00-20:00, Péntek 15:00-19:00",
+    "audience": "adult",
     "sites": [
       "zuglo"
     ]
@@ -55,6 +58,7 @@
     "email": "brigitta.redei@gmail.com",
     "phone": "",
     "hours": "Csütörtök 8:00-13:00",
+    "audience": "adult",
     "sites": [
       "zuglo"
     ]
@@ -70,6 +74,7 @@
     "email": "csanyi.nikoletta.2011@gmail.com",
     "phone": "",
     "hours": "Péntek 14:00-20:00, Szombat 10:00-14:00",
+    "audience": "child",
     "sites": [
       "zuglo"
     ]
@@ -85,6 +90,7 @@
     "email": "",
     "phone": "",
     "hours": "Hétfő 9:00-14:00, Szerda 9:00-12:00, Csütörtök 8:00-14:00",
+    "audience": "adult",
     "sites": [
       "zuglo"
     ]
@@ -100,6 +106,7 @@
     "email": "fejes.judit.anna.pszichologus@gmail.com",
     "phone": "",
     "hours": "Péntek 11:00-15:00",
+    "audience": "both",
     "sites": [
       "zuglo"
     ]
@@ -115,6 +122,7 @@
     "email": "gendalor@gmail.com",
     "phone": "",
     "hours": "Kedd 13:00-20:00, Szerda 15:00-20:00, Szombat 9:00-14:00",
+    "audience": "adult",
     "sites": [
       "zuglo"
     ]
@@ -130,6 +138,7 @@
     "email": "balazsszabina.pszi@gmail.com",
     "phone": "",
     "hours": "Péntek 8:00-11:00, 15:00-19:00",
+    "audience": "both",
     "sites": [
       "zuglo"
     ]
@@ -145,6 +154,7 @@
     "email": "",
     "phone": "",
     "hours": "Hétfő 16:00-20:00",
+    "audience": "adult",
     "sites": [
       "zuglo"
     ]
@@ -160,6 +170,7 @@
     "email": "pszichologus.szemananita@gmail.com",
     "phone": "",
     "hours": "Szerda 14:00-20:00",
+    "audience": "adult",
     "sites": [
       "zuglo"
     ]
@@ -175,6 +186,7 @@
     "email": "",
     "phone": "",
     "hours": "Csütörtök 17:00-20:00",
+    "audience": "adult",
     "sites": [
       "zuglo"
     ]
@@ -190,6 +202,7 @@
     "email": "lukacs.dora.klinpszi@gmail.com",
     "phone": "",
     "hours": "Szerda 8:00-12:00, 16:00-20:00",
+    "audience": "adult",
     "sites": [
       "zuglo"
     ]
@@ -205,6 +218,7 @@
     "email": "bartokluca.pszicho@gmail.com",
     "phone": "",
     "hours": "Szerda 8:00-14:00",
+    "audience": "child",
     "sites": [
       "zuglo"
     ]
@@ -220,6 +234,7 @@
     "email": "nribiczey@gmail.com",
     "phone": "",
     "hours": "Hétfő 14:00-19:00, Kedd 8:00-12:00, Csütörtök 9:00-18:00",
+    "audience": "child",
     "sites": [
       "zuglo"
     ]
@@ -235,6 +250,7 @@
     "email": "andrea@andreamartonicz.com",
     "phone": "+36 30 414 00 29",
     "hours": "Hétfő és Csütörtök 9:00–15:00 (bejelentkezés)",
+    "audience": "adult",
     "sites": [
       "gellert"
     ]
@@ -250,6 +266,7 @@
     "email": "lajtorjas.szabo.judit@gmail.com",
     "phone": "+36 30 414 00 29",
     "hours": "Egyéni megbeszélés szerint",
+    "audience": "adult",
     "sites": [
       "gellert"
     ]
@@ -265,6 +282,7 @@
     "email": "",
     "phone": "+36 30 414 00 29",
     "hours": "Egyéni megbeszélés szerint",
+    "audience": "adult",
     "sites": [
       "gellert"
     ]
@@ -280,6 +298,7 @@
     "email": "hello@havasikriszta.hu",
     "phone": "+36 30 414 00 29",
     "hours": "Egyéni megbeszélés szerint",
+    "audience": "adult",
     "sites": [
       "gellert"
     ]
@@ -295,6 +314,7 @@
     "email": "",
     "phone": "+36 30 414 00 29",
     "hours": "Egyéni megbeszélés szerint",
+    "audience": "adult",
     "sites": [
       "gellert"
     ]
@@ -310,6 +330,7 @@
     "email": "szilinora@gmail.com",
     "phone": "+36-30/195-5387",
     "hours": "Szerda délelőtt, Péntek délután",
+    "audience": "adult",
     "sites": [
       "gellert"
     ]
