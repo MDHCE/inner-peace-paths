@@ -28,7 +28,7 @@ const ContactSection = () => (
           className="space-y-5"
         >
           <ContactCard icon={Phone} title="Telefon" detail="06 30 414 0029" subtitle="H és Cs 9:00–15:00" href="tel:+36304140029" />
-          <ContactCard icon={Mail} title="Email" detail="andreamartonicz@gmail.com" href="mailto:andreamartonicz@gmail.com" />
+          <ContactCard icon={Mail} title="Email" detail="info@zugloipszichologiaikozpont.hu" href="mailto:info@zugloipszichologiaikozpont.hu" />
           <ContactCard icon={MapPin} title="Cím" detail="1142 Budapest, Kassai utca 76/2." subtitle="Bejárat a Kassai utca felől" />
           <ContactCard icon={Clock} title="Nyitvatartás" detail="H–P: 8:00–20:00" subtitle="Szombat: 8:00–15:00" />
         </motion.div>

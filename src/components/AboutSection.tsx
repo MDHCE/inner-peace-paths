@@ -2,13 +2,13 @@ import { motion } from "framer-motion";
 import { Shield, Award, Clock } from "lucide-react";
 
 const highlights = [
-  { icon: Shield, label: "ÁNTSZ engedély", value: "513289" },
+  { icon: Shield, label: "NEAK szám", value: "513289" },
   { icon: Award, label: "Szakmai tapasztalat", value: "15+ év" },
   { icon: Clock, label: "Nyitvatartás", value: "H-P 8-20, Sz 8-15" },
 ];
 
 const AboutSection = () => (
-  <section id="rolunk" className="py-24 lg:py-32 bg-background">
+  <section id="rolunk" className="py-24 lg:py-32 bg-background leaf-bg">
     <div className="container mx-auto px-4">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
         <motion.div

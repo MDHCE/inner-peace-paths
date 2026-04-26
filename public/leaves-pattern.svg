@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220">
+  <defs>
+    <symbol id="leaf" viewBox="-2 -14 30 28">
+      <path d="M0 0 Q 12 -14 24 -2 Q 12 6 0 0 Z" fill="currentColor" fill-opacity="0.35"/>
+      <path d="M0 0 Q 12 -14 24 -2" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-opacity="0.6"/>
+      <path d="M3 -1 L 19 -3" fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-opacity="0.45"/>
+    </symbol>
+    <symbol id="leaf-small" viewBox="-2 -10 22 20">
+      <path d="M0 0 Q 8 -10 18 -2 Q 8 4 0 0 Z" fill="currentColor" fill-opacity="0.32"/>
+      <path d="M0 0 Q 8 -10 18 -2" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-opacity="0.55"/>
+    </symbol>
+  </defs>
+  <g color="#3f7a6c" opacity="0.16">
+    <!-- Top-left sprig: stem with three leaves -->
+    <g transform="translate(15 35) rotate(15)">
+      <path d="M0 0 L 75 0" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-opacity="0.55"/>
+      <use href="#leaf" x="3" y="-1" width="22" height="20"/>
+      <use href="#leaf" x="28" y="-1" width="22" height="20"/>
+      <use href="#leaf" x="53" y="-1" width="22" height="20"/>
+    </g>
+
+    <!-- Top-right single leaf with curved stem -->
+    <g transform="translate(165 50) rotate(-30)">
+      <path d="M-18 8 Q -10 4 0 0" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-opacity="0.55"/>
+      <use href="#leaf" x="0" y="-1" width="26" height="22"/>
+    </g>
+
+    <!-- Center mirrored pair -->
+    <g transform="translate(105 115) rotate(50)">
+      <path d="M-26 0 L 26 0" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-opacity="0.55"/>
+      <g transform="scale(-1 1)">
+        <use href="#leaf" x="3" y="-1" width="22" height="20"/>
+      </g>
+      <use href="#leaf" x="3" y="-1" width="22" height="20"/>
+    </g>
+
+    <!-- Bottom-left single -->
+    <g transform="translate(35 175) rotate(-25)">
+      <path d="M-14 7 Q -7 3 0 0" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-opacity="0.55"/>
+      <use href="#leaf" x="0" y="-1" width="24" height="20"/>
+    </g>
+
+    <!-- Bottom-right sprig -->
+    <g transform="translate(160 175) rotate(115)">
+      <path d="M0 0 L 55 0" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-opacity="0.55"/>
+      <use href="#leaf-small" x="3" y="-1" width="20" height="18"/>
+      <use href="#leaf-small" x="28" y="-1" width="20" height="18"/>
+    </g>
+
+    <!-- Tiny accent leaves for variety -->
+    <g transform="translate(85 45) rotate(70)">
+      <use href="#leaf-small" x="0" y="0" width="16" height="14"/>
+    </g>
+    <g transform="translate(45 110) rotate(-50)">
+      <use href="#leaf-small" x="0" y="0" width="16" height="14"/>
+    </g>
+    <g transform="translate(190 130) rotate(40)">
+      <use href="#leaf-small" x="0" y="0" width="16" height="14"/>
+    </g>
+  </g>
+</svg>
