@@ -1,5 +1,22 @@
 [
   {
+    "slug": "martonicz-andrea",
+    "name": "Martonicz Andrea",
+    "title": "Klinikai szakpszichológus, pszichoterapeuta",
+    "image": "https://www.gellerthegyirendelo.hu/wp-content/uploads/2019/07/MartoniczAndi-13-792x1024.jpg",
+    "description": "Üdvözlöm, Martonicz Andrea vagyok, 20 éve dolgozom pszichológusként. Ez idő alatt számos különféle élethelyzettel találkoztam és megtapasztaltam, hogy a problémák belső okainak feltárásával, megértésével el lehet jutni a megoldáshoz, a változáshoz. Pszichodinamikus szemléletben dolgozom: az analitikus pszichoterápia kereteit felhasználva az öntudatlan érzések, vágyak és motivációk megértésén és feldolgozásán keresztül segítem a pácienseket. A jelen pillanat érzéseire és a terápiás kapcsolatra nagy hangsúlyt fektetek.",
+    "specialties": "Szorongásos zavarok, hangulatzavarok, önbizalomhiány, életvezetési nehézségek, párkapcsolati problémák, pszichoszomatikus tünetek, pszichodinamikus terápia, analitikus pszichoterápia",
+    "education": "Pszichológus diploma – ELTE PPK (2001–2007); Klinikai és mentálhigiéniai szakpszichológus – PTE BTK (2007–2011); Tündérhegyi Európai Pszichoterapeuta Képzés – OORI (2011–2015); Szakvizsga – 2011; Pszichoterapeuta szakvizsga – 2020; Analitikusan orientált önismereti analízis – Magyar Pszichoanalitikus Egyesület",
+    "email": "andrea@andreamartonicz.com",
+    "phone": "+36 30 773 70 33",
+    "hours": "Hétfő és Csütörtök 9:00–15:00 (bejelentkezés)",
+    "audience": "adult",
+    "sites": [
+      "zuglo",
+      "gellert"
+    ]
+  },
+  {
     "slug": "toth-orsolya",
     "name": "Tóth Orsolya",
     "title": "Tanácsadó szakpszichológus, pszichodráma vezető",
@@ -35,7 +52,7 @@
     "slug": "poka-toth-barbara",
     "name": "Póka-Tóth Barbara",
     "title": "Pszichológus, képzésben lévő komplex integratív terapeuta",
-    "image": "/therapists/unified/poka-toth-barbara.jpg",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2025/09/P-T_Barbara_kisebb.png",
     "description": "Hiszem, hogy szenvedéseink és életünk nem hiábavalók, a kettő karöltve jár egymással, és mindkettőnek értelme van. Azonban sokszor – főleg ha éppen szenvedünk – nem könnyű rálelni, hogy ez az értelem miben is rejlik, nem könnyű megtalálni a labirintusból kivezető utat. Ezért természetes, hogy az értelem és a személyes erőforrások megtalálásához, a nyugalom és a derű visszanyeréséhez időről időre külső segítségre lehet szükségünk. Szemléletemet a pszichodynamikus mellett a személyközpontú irányzat határozza meg. Ebből fakadóan célom olyan bizalomra és elfogadásra épülő biztonságos közeg kialakítása, melyben a személyre szabott módszerek még hatékonyabban tudják támogatni a pozitív irányú változást, fejlődést. Szeretettel várok mindenkit, aki életvezetési problémákkal küzd, szeretné visszanyerni lelki egyensúlyát és szívesen mélyítené önismeretét.",
     "specialties": "Komplex integratív terápia, pszichodynamikus terápia, személyközpontú terápia, életvezetési tanácsadás, önismeret",
     "education": "Komplex Integratív Terapeuta képzés (folyamatban) – MAKOMP; Okleveles pszichológus (Pszichológia MA), tanácsadás és iskolapszichológia specializáció – Szegedi Tudományegyetem; Viselkedéselemző (Pszichológia BA) – Pécsi Tudományegyetem",
@@ -131,7 +148,7 @@
     "slug": "erdelyi-balazs-szabina",
     "name": "Erdélyi-Balázs Szabina",
     "title": "Tanácsadó szakpszichológus, képzésben lévő pár- és családterapeuta",
-    "image": "/therapists/unified/erdelyi-balazs-szabina.jpg",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2021/08/Erdélyi-Balázs-Szabina_profilkép-scaled.jpg",
     "description": "Szakmai pályafutásom kezdete óta a pszichológiai tanácsadás szemléletében tevékenykedem. A magánellátásban végzett munkám során elsősorban felnőtteket kísérek, akik életük valamely területén elakadást, krízist vagy nehézséget élnek meg. Ezenfelül több éve végzem sajátos nevelési igényű gyermekek és fiatalok, valamint családjaik pszichológiai támogatását. Fontos számomra a rendszerszemlélet, amely nemcsak az egyéni nehézségekre, hanem az egyént körülvevő kapcsolatokra és élethelyzetekre is figyelmet fordít. A közös munka során arra törekszem, hogy biztonságos és elfogadó légkört teremtsek, ahol lehetőség nyílik a gondolatok és érzések szabad megfogalmazására. Hiszek abban, hogy mindenkiben ott rejlenek azok az erőforrások, amelyek sokszor rejtve maradnak a nehézségek idején.",
     "specialties": "Életvezetési tanácsadás, krízistanácsadás, párterápia, családterápia, sajátos nevelési igény",
     "education": "Tanácsadó szakpszichológus krízistanácsadás specializációval – ELTE PPK; Okleveles pszichológus tanácsadás és iskolapszichológia szakiránnyal – ELTE PPK; Családterápiás képzés (folyamatban) – Magyar Családterápiás Egyesület",
@@ -147,7 +164,7 @@
     "slug": "koteles-anna",
     "name": "Köteles Anna",
     "title": "Pszichológus, sport-szakpszichológus jelölt",
-    "image": "",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2022/03/IMG_8040-scaled.jpg",
     "description": "Sportpszichológia, autogén tréning és mentális teljesítményfokozás területén dolgozom.",
     "specialties": "Sportpszichológia, autogén tréning, mentális teljesítmény",
     "education": "",
@@ -211,7 +228,7 @@
     "slug": "bartok-luca",
     "name": "Bartók Luca",
     "title": "Pszichológus, integrált szülő-csecsemő/kisgyermek konzulens, képzésben lévő pár- és családterapeuta",
-    "image": "/therapists/unified/bartok-luca.jpg",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2026/03/IMG_1422-scaled.jpeg",
     "description": "Tanulmányaim során érdeklődésem középpontjába hamar a kisgyermekek és az őket körülvevő környezet került. Már szakmai gyakorlatomat is egy XI. kerületi bölcsődében töltöttem, és ennek köszönhetően találkoztam az integrált szülő-csecsemő konzultáció módszerével, ami korán eldöntötte szakmai irányultságomat. Ezt követően mentaliz­ációt fejlesztő mesecsoportokat tartottam hátrányos helyzetű gyermekek számára, majd óvodapszichológusként dolgoztam. Fő célom a kisgyermeket nevelő családok támogatása lett, és nehézségeik rendszerszintű átlátása érdekében elkezdtem a pár- és családterapeuta képzést is. Fontosnak tartom, hogy a koragyermekkori regulációs zavarok létezésére nagyobb hangsúly kerüljön, és minél több család segítséget kapjon kezelésükben. Közös gondolkodásra invitálom a szülőket, hogy gyermeküket és a velük való kapcsolatukat jobban megértsék. Szeretettel várom a 0–6 év közötti gyermekeket és szüleiket.",
     "specialties": "Szülő-csecsemő konzultáció, koragyermekkori fejlődés (0–6 év), regulációs zavarok, óvodapszichológia, pár- és családterápia",
     "education": "Okleveles pszichológus, fejlődés- és klinikai gyermekpszichológia szakiránnyal – ELTE PPK; Integrált szülő-csecsemő konzultáció – Semmelweis Egyetem EKK Mentálhigiéné Intézet; Családterápiás képzés (elméleti fázis) – Magyar Családterápiás Egyesület",
@@ -227,7 +244,7 @@
     "slug": "ribiczey-nora",
     "name": "dr. M. Ribiczey Nóra",
     "title": "Pedagógiai szakpszichológus, integrált szülő-csecsemő/kisgyermek konzulens, PhD",
-    "image": "/therapists/unified/ribiczey-nora.jpg",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2021/01/MRibiczeyNóra-4.jpg",
     "description": "Több mint 20 éve dolgozom pszichológusként, elsősorban gyermekekkel és családokkal. Gyermekvédelemben, óvodában és bölcsődében szereztem pszichológusi tapasztalatot, továbbá oktatási és kutatási téren is tevékenykedtem az ELTE-n. Fontos számomra a szülőkkel való munka, mely akár önállóan, akár a gyermek pszichés támogatása mellett is helyet kaphat a segítő folyamatban. Hiszem, hogy minden szülő a legjobb ismerője saját gyermekének, ugyanakkor lehetnek elakadások akár a gyermeknevelés, a családi működések, a szülőség megélése terén. Gyermekek és serdülők egyéni pszichés támogatását vállalom többek között szorongás, érzelemszabályozás, beilleszkedési kérdések, önértékelési nehézségek terén. Szülő-csecsemő konzulensként baba-szülő párokkal is dolgozom alvási, evési, sírással, daccal, szobatisztasággal vagy szeparációs szorongással kapcsolatos kérdéskörökben.",
     "specialties": "Gyermek- és serdülőpszichológia, szülő-csecsemő konzultáció, szülőkonzultáció, szorongás, érzelemszabályozás, örökbefogadás, mozaikcsalád",
     "education": "Integrált szülő-csecsemő/kisgyermek konzulens – SOTE; Pedagógiai szakpszichológus (óvoda- és iskolapszichológus) – ELTE PPK; Pszichodráma asszisztens – Magyar Pszichodráma Egyesület; PhD fokozat – ELTE Pszichológiatudományi Doktori Iskola; Okleveles pszichológus és pszichológia szakos tanár – ELTE BTK",
@@ -240,19 +257,19 @@
     ]
   },
   {
-    "slug": "martonicz-andrea",
-    "name": "Martonicz Andrea",
-    "title": "Felnőtt klinikai szakpszichológus, pszichoterapeuta",
-    "image": "https://www.gellerthegyirendelo.hu/wp-content/uploads/2019/07/MartoniczAndi-13-792x1024.jpg",
-    "description": "Több mint 15 éves klinikai tapasztalattal rendelkezem. Pszichodinamikus szemléletben dolgozom: az analitikus pszichoterápia kereteit felhasználva az öntudatlan érzések, vágyak és motivációk megértésén és feldolgozásán keresztül segítem a pácienseket. A jelen pillanat érzéseire és a terápiás kapcsolatra nagy hangsúlyt fektetek.",
-    "specialties": "Szorongásos tünetek, depresszió, pszichodinamikus terápia, analitikus pszichoterápia",
-    "education": "Pszichológus diploma – ELTE PPK;Felnőtt klinikai és mentálhigiéniai szakpszichológus – Pécsi Tudományegyetem;Analitikusan orientált önismereti analízis – Magyar Pszichoanalitikus Egyesület;Tündérhegyi Európai Pszichoterápiás Képzés – OORI;Alap- és technikai szemináriumok – Magyar Pszichoanalitikus Egyesület",
-    "email": "andrea@andreamartonicz.com",
-    "phone": "+36 30 414 00 29",
-    "hours": "Hétfő és Csütörtök 9:00–15:00 (bejelentkezés)",
-    "audience": "adult",
+    "slug": "kolyane-gabor-alexandra",
+    "name": "Kólyáné Gábor Alexandra",
+    "title": "Gyermek- és ifjúsági klinikai és mentálhigiéniai szakpszichológus",
+    "image": "http://zugloirendelo.hu/wp-content/uploads/2023/08/alexandra.png",
+    "description": "Több, mint 10 éve dolgozom pszichológusként. Pszichológus diplomámat a Szegedi Tudományegyetemen szereztem 2010-ben, majd 2016-ban gyermek és ifjúsági klinikai és mentálhigiéniai szakpszichológusi címet szereztem a Pécsi Tudományegyetemen. A munkával töltött évek nagy részében pedagógiai szakszolgálatban dolgoztam gyermekekkel, serdülőkkel és családjaikkal. Pályám kezdetén azonban 3 éven át a Szegedi Pszichiátriai Klinikán önkéntes tevékenységet ellátva a felnőtt klinikumban is tapasztalatot szerezhettem. A pedagógiai szakszolgálatnál töltött munka meghatározó volt a számomra. Az évek során remek szakmai közösségek támogatása mellett fejlődhettem pszichológus, pszichiáter, gyógypedagógus és konduktor kollégákkal. Sok esetben teamben dolgoztunk, ebből fakadóan az elénk táruló problémákat komplex módon közelíthettük meg. Részt vettem egyéni és csoportos folyamatokban, vezettem vizsgálatokat, és végeztem nevelési tanácsadást, terápiás tevékenységet, részt vettem korai intervencióban. Csecsemőkortól fiatal felnőttkorig valamennyi életkori csoportban a problémák széles skálájával találkoztam. A pszichológusi munkában az motivál, hogy a gyermekeket és szüleiket, illetve felnőtt klienseket kísérhetek egy nehéz élethelyzetben segítve azt a folyamatot, hogy az együtt gondolkodás során belső erőforrásaikat felfedezve, problémáikra egy új szemszögből ránézve, új megoldási módokat találva túljuthassanak elakadásaikon. Munkám során integratív szemléletben dolgozom. Bizalomteli, elfogadó, megtartó kapcsolatot építve törekszem a kliens személyiségéhez, problémájához igazodó módszer kiválasztására. A gyermekekkel végzett munka során a játék, a mese, az alkotás gyógyító erejét imaginatív és kognitív-viselkedésterápiás eszközökkel kiegészítve használom, hogy a gyermek nehéz érzései enyhülhessenek, és a változás megindulhasson. Fontos számomra a szülőkkel való aktív kapcsolat, szülői konzultáció, nevelési tanácsadás. A szülőkkel való együtt gondolkodás során megismerhetővé válik a családi rendszer működése, a gyermek érzelemvilága, elakadásainak mélyebb háttere. Ez a folyamat segítheti a szülő-gyermek kapcsolat, és a szülői kompetenciák megerősödését.",
+    "specialties": "Gyermek- és ifjúsági pszichoterápia, családkonzultáció, nevelési tanácsadás, korai intervenció, kognitív-viselkedésterápia, imaginatív technikák, játék- és meseterápia",
+    "education": "Okleveles pszichológus – SZTE BTK; Gyermekpszichoterápiás Szeminárium – Jelenlét Pszichoterápiás Rendelő; Gyermek- és ifjúsági klinikai és mentálhigiéniai szakpszichológus – PTE BTK; Komplex integratív gyermekterapeuta jelölt – MAKOMP",
+    "email": "",
+    "phone": "",
+    "hours": "Kedd 9:00-18:00",
+    "audience": "child",
     "sites": [
-      "gellert"
+      "zuglo"
     ]
   },
   {
