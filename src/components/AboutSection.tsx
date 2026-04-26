@@ -8,7 +8,7 @@ const highlights = [
 ];
 
 const AboutSection = () => (
-  <section id="rolunk" className="py-24 lg:py-32 bg-background">
+  <section id="rolunk" className="py-24 lg:py-32 bg-background leaf-bg">
     <div className="container mx-auto px-4">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
         <motion.div
