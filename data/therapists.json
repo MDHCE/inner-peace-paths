@@ -1,5 +1,22 @@
 [
   {
+    "slug": "martonicz-andrea",
+    "name": "Martonicz Andrea",
+    "title": "Klinikai szakpszichológus, pszichoterapeuta",
+    "image": "https://www.gellerthegyirendelo.hu/wp-content/uploads/2019/07/MartoniczAndi-13-792x1024.jpg",
+    "description": "Üdvözlöm, Martonicz Andrea vagyok, 20 éve dolgozom pszichológusként. Ez idő alatt számos különféle élethelyzettel találkoztam és megtapasztaltam, hogy a problémák belső okainak feltárásával, megértésével el lehet jutni a megoldáshoz, a változáshoz. Pszichodinamikus szemléletben dolgozom: az analitikus pszichoterápia kereteit felhasználva az öntudatlan érzések, vágyak és motivációk megértésén és feldolgozásán keresztül segítem a pácienseket. A jelen pillanat érzéseire és a terápiás kapcsolatra nagy hangsúlyt fektetek.",
+    "specialties": "Szorongásos zavarok, hangulatzavarok, önbizalomhiány, életvezetési nehézségek, párkapcsolati problémák, pszichoszomatikus tünetek, pszichodinamikus terápia, analitikus pszichoterápia",
+    "education": "Pszichológus diploma – ELTE PPK (2001–2007); Klinikai és mentálhigiéniai szakpszichológus – PTE BTK (2007–2011); Tündérhegyi Európai Pszichoterapeuta Képzés – OORI (2011–2015); Szakvizsga – 2011; Pszichoterapeuta szakvizsga – 2020; Analitikusan orientált önismereti analízis – Magyar Pszichoanalitikus Egyesület",
+    "email": "andrea@andreamartonicz.com",
+    "phone": "+36 30 773 70 33",
+    "hours": "Hétfő és Csütörtök 9:00–15:00 (bejelentkezés)",
+    "audience": "adult",
+    "sites": [
+      "zuglo",
+      "gellert"
+    ]
+  },
+  {
     "slug": "toth-orsolya",
     "name": "Tóth Orsolya",
     "title": "Tanácsadó szakpszichológus, pszichodráma vezető",
@@ -253,22 +270,6 @@
     "audience": "child",
     "sites": [
       "zuglo"
-    ]
-  },
-  {
-    "slug": "martonicz-andrea",
-    "name": "Martonicz Andrea",
-    "title": "Felnőtt klinikai szakpszichológus, pszichoterapeuta",
-    "image": "https://www.gellerthegyirendelo.hu/wp-content/uploads/2019/07/MartoniczAndi-13-792x1024.jpg",
-    "description": "Több mint 15 éves klinikai tapasztalattal rendelkezem. Pszichodinamikus szemléletben dolgozom: az analitikus pszichoterápia kereteit felhasználva az öntudatlan érzések, vágyak és motivációk megértésén és feldolgozásán keresztül segítem a pácienseket. A jelen pillanat érzéseire és a terápiás kapcsolatra nagy hangsúlyt fektetek.",
-    "specialties": "Szorongásos tünetek, depresszió, pszichodinamikus terápia, analitikus pszichoterápia",
-    "education": "Pszichológus diploma – ELTE PPK;Felnőtt klinikai és mentálhigiéniai szakpszichológus – Pécsi Tudományegyetem;Analitikusan orientált önismereti analízis – Magyar Pszichoanalitikus Egyesület;Tündérhegyi Európai Pszichoterápiás Képzés – OORI;Alap- és technikai szemináriumok – Magyar Pszichoanalitikus Egyesület",
-    "email": "andrea@andreamartonicz.com",
-    "phone": "+36 30 414 00 29",
-    "hours": "Hétfő és Csütörtök 9:00–15:00 (bejelentkezés)",
-    "audience": "adult",
-    "sites": [
-      "gellert"
     ]
   },
   {
