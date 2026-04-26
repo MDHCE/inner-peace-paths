@@ -1,0 +1,41 @@
+# Rebuilt inside the container
+node_modules
+dist
+dist-ssr
+
+# Secrets must come via docker-compose env, not the build context
+.env
+.env.local
+.env.*.local
+
+# Logs and OS junk
+*.log
+npm-debug.log*
+.DS_Store
+
+# Editor configs
+.vscode
+.idea
+
+# Git history & GitHub config
+.git
+.github
+.gitignore
+
+# Tests / dev-only assets
+playwright.config.ts
+playwright-fixture.ts
+vitest.config.ts
+
+# Project docs and worktrees (not needed at runtime)
+__plans
+README.md
+.claude
+
+# Python social agent (separate runtime, not part of the Node image)
+agents
+scripts
+
+# Docker meta (avoid recursion)
+Dockerfile
+.dockerignore
