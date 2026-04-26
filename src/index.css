@@ -37,7 +37,7 @@
     --radius: 0.75rem;
 
     --leaf-pattern: url('/leaves-pattern.svg');
-    --leaf-tile-size: 220px 220px;
+    --leaf-tile-size: 240px 240px;
 
     --hero-gradient: linear-gradient(135deg, hsl(168 35% 35% / 0.9), hsl(200 30% 30% / 0.85));
     --section-gradient: var(--leaf-pattern) repeat 0 0 / var(--leaf-tile-size), linear-gradient(180deg, hsl(40 33% 97%), hsl(40 25% 95%));

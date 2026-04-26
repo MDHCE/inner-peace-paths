@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, User } from "lucide-react";
+import { ArrowRight, User, Users, Baby } from "lucide-react";
 import { useSite } from "@/context/SiteContext";
 
 interface Therapist {
@@ -72,6 +72,7 @@ const TherapistsSection = () => {
           <TherapistGroup
             id="felnottek"
             title="Felnőttekkel foglalkozó szakembereink"
+            icon={Users}
             therapists={adults}
             therapistRoute={therapistRoute}
           />
@@ -81,9 +82,10 @@ const TherapistsSection = () => {
           <TherapistGroup
             id="gyermekek-serdulok"
             title="Gyermekekkel és serdülőkkel foglalkozó szakembereink"
+            icon={Baby}
             therapists={children}
             therapistRoute={therapistRoute}
-            className="mt-20"
+            className="mt-24"
           />
         )}
       </div>
@@ -94,12 +96,14 @@ const TherapistsSection = () => {
 const TherapistGroup = ({
   id,
   title,
+  icon: Icon,
   therapists,
   therapistRoute,
   className = "",
 }: {
   id: string;
   title: string;
+  icon: typeof Users;
   therapists: Therapist[];
   therapistRoute: string;
   className?: string;
@@ -110,13 +114,21 @@ const TherapistGroup = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="flex items-center gap-4 mb-10"
+      className="flex flex-col items-center gap-4 mb-12"
     >
-      <span className="h-px flex-1 bg-gradient-to-r from-transparent to-primary/40" />
-      <h3 className="font-display text-2xl md:text-3xl font-semibold text-foreground text-center">
-        {title}
-      </h3>
-      <span className="h-px flex-1 bg-gradient-to-l from-transparent to-primary/40" />
+      <div className="inline-flex items-center gap-3 bg-background/80 backdrop-blur-sm border border-primary/20 rounded-full px-5 py-2 shadow-sm">
+        <Icon className="w-5 h-5 text-primary" />
+        <span className="text-primary text-xs uppercase tracking-[0.2em] font-semibold">
+          {therapists.length} szakember
+        </span>
+      </div>
+      <div className="flex items-center gap-4 w-full">
+        <span className="h-px flex-1 bg-gradient-to-r from-transparent to-primary/40" />
+        <h3 className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground text-center">
+          {title}
+        </h3>
+        <span className="h-px flex-1 bg-gradient-to-l from-transparent to-primary/40" />
+      </div>
     </motion.div>
 
     <motion.div
