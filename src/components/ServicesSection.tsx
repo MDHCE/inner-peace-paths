@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { User, Baby, Heart, Users, Brain, Laptop, Smile, BookOpen, Briefcase, Sparkles, type LucideIcon } from "lucide-react";
+import { Link } from "react-router-dom";
+import { User, Baby, Heart, Users, Brain, Laptop, Smile, BookOpen, Briefcase, Sparkles, ArrowRight, type LucideIcon } from "lucide-react";
 import { useSiteContent } from "@/context/SiteContent";
 
 // Icon name → component map. Add more as needed.
@@ -8,12 +9,12 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 const defaultTiles = [
-  { icon: "User", title: "Felnőtt egyéni terápia", description: "Klinikai szakpszichológia, pszichológiai tanácsadás, személyiségvizsgálat, autogén tréning és relaxáció." },
-  { icon: "Baby", title: "Gyermekterápia", description: "Nevelési tanácsadás, iskolaérettség vizsgálata, ADHD diagnosztika, viselkedéses zavarok kezelése." },
-  { icon: "Heart", title: "Párterápia", description: "Kommunikációs problémák, elhidegülés, féltékenység, szexuális problémák és konfliktuskezelés." },
-  { icon: "Users", title: "Családterápia", description: "Gyermeknevelési problémák, családi kommunikáció javítása, konfliktusok feloldása." },
-  { icon: "Brain", title: "Pszichológiai vizsgálatok", description: "Intelligencia- és személyiségtesztek, figyelemzavar vizsgálata, projektív tesztek." },
-  { icon: "Laptop", title: "Online terápia", description: "Távkonzultációs lehetőség kényelmes otthoni környezetben, ugyanolyan szakmai színvonalon." },
+  { icon: "User",   slug: "felnott-egyeni-terapia",      title: "Felnőtt egyéni terápia", description: "Klinikai szakpszichológia, pszichológiai tanácsadás, személyiségvizsgálat, autogén tréning és relaxáció." },
+  { icon: "Smile",  slug: "gyermekterapia",              title: "Gyermekterápia",         description: "Nevelési tanácsadás, iskolaérettség vizsgálata, ADHD diagnosztika, viselkedéses zavarok kezelése." },
+  { icon: "Heart",  slug: "parterapia",                  title: "Párterápia",             description: "Kommunikációs problémák, válságok feldolgozása, kapcsolati minták felismerése és átalakítása." },
+  { icon: "Users",  slug: "csaladterapia",               title: "Családterápia",          description: "Gyermeknevelési problémák, családi kommunikáció, családi rendszerek vizsgálata és támogatása." },
+  { icon: "Brain",  slug: "pszichodiagnosztika",         title: "Pszichodiagnosztika",    description: "Intelligencia- és személyiségtesztek, figyelemzavar vizsgálata, klinikai szakvélemény." },
+  { icon: "Baby",   slug: "szulo-csecsemo-konzultacio",  title: "Szülő-csecsemő konzultáció", description: "Koragyermekkori regulációs zavarok, alvás-, evés-, sírás-problémák, kötődés támogatása 0–6 éves korban." },
 ];
 
 const container = {
@@ -31,6 +32,7 @@ const ServicesSection = () => {
   const kicker = services?.kicker ?? "Szolgáltatásaink";
   const heading = services?.heading ?? "Miben segíthetünk?";
   const subtitle = services?.subtitle ?? "Minden életkorban és élethelyzetben megbízható pszichológiai támogatást nyújtunk.";
+  const linkLabel = services?.details_link_label ?? "Részletek";
   const tiles = services?.tiles?.length ? services.tiles : defaultTiles;
 
   return (
@@ -60,11 +62,12 @@ const ServicesSection = () => {
         >
           {tiles.map((s, idx) => {
             const Icon = iconMap[s.icon || ""] ?? User;
+            const hasDetails = !!s.slug;
             return (
               <motion.div
-                key={(s.title || "tile") + idx}
+                key={(s.slug || s.title || "tile") + idx}
                 variants={item}
-                className="group bg-background rounded-xl p-8 transition-shadow duration-300"
+                className="group bg-background rounded-xl p-8 transition-shadow duration-300 flex flex-col"
                 style={{ boxShadow: "var(--card-shadow)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.boxShadow = "var(--card-shadow-hover)")}
                 onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "var(--card-shadow)")}
@@ -73,7 +76,16 @@ const ServicesSection = () => {
                   <Icon className="w-6 h-6 text-accent-foreground" />
                 </div>
                 <h3 className="font-display text-xl font-semibold text-foreground mb-3">{s.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{s.description}</p>
+                <p className="text-muted-foreground leading-relaxed flex-1">{s.description}</p>
+                {hasDetails && (
+                  <Link
+                    to={`/szolgaltatasok/${s.slug}`}
+                    className="mt-5 inline-flex items-center gap-2 text-primary text-sm font-medium hover:gap-3 transition-all"
+                  >
+                    {linkLabel}
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                )}
               </motion.div>
             );
           })}

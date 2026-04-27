@@ -116,11 +116,8 @@ const TherapistGroup = ({
       transition={{ duration: 0.5 }}
       className="flex flex-col items-center gap-4 mb-12"
     >
-      <div className="inline-flex items-center gap-3 bg-background/80 backdrop-blur-sm border border-primary/20 rounded-full px-5 py-2 shadow-sm">
+      <div className="w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border border-primary/20 flex items-center justify-center shadow-sm">
         <Icon className="w-5 h-5 text-primary" />
-        <span className="text-primary text-xs uppercase tracking-[0.2em] font-semibold">
-          {therapists.length} szakember
-        </span>
       </div>
       <div className="flex items-center gap-4 w-full">
         <span className="h-px flex-1 bg-gradient-to-r from-transparent to-primary/40" />
@@ -146,17 +143,15 @@ const TherapistGroup = ({
           style={{ boxShadow: "var(--card-shadow)" }}
           whileHover={{ y: -4 }}
         >
-          <div className="aspect-[4/3] overflow-hidden bg-accent">
+          <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center">
             {t.image ? (
               <img
                 src={t.image}
                 alt={t.name}
-                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center">
-                <User className="w-20 h-20 text-muted-foreground/30" />
-              </div>
+              <User className="w-20 h-20 text-muted-foreground/30" />
             )}
           </div>
 
