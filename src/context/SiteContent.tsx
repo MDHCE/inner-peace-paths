@@ -12,10 +12,13 @@ export interface SiteContent {
     kicker?: string;
     heading?: string;
     subtitle?: string;
+    details_link_label?: string;
     tiles?: Array<{
       icon?: string;
+      slug?: string;
       title?: string;
       description?: string;
+      content?: string;
     }>;
   };
   about?: {

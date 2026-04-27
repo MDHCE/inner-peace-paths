@@ -810,19 +810,28 @@ const SiteContentEditor = ({
     onChange({ ...value, [section]: { ...(value[section] || {}), ...patch } });
   };
 
+  const TARGET_TILE_COUNT = 6;
   const setTile = (idx: number, patch: Partial<NonNullable<SiteContent["services"]>["tiles"][number]>) => {
     const tiles = [...(value.services?.tiles || [])];
     tiles[idx] = { ...tiles[idx], ...patch };
     set("services", { tiles });
   };
   const addTile = () => {
-    const tiles = [...(value.services?.tiles || []), { icon: "User", title: "", description: "" }];
+    const tiles = [...(value.services?.tiles || [])];
+    if (tiles.length >= TARGET_TILE_COUNT) return;
+    tiles.push({ icon: "User", slug: "", title: "", description: "", content: "" });
     set("services", { tiles });
   };
   const removeTile = (idx: number) => {
     const tiles = (value.services?.tiles || []).filter((_, i) => i !== idx);
     set("services", { tiles });
   };
+  const slugify = (s: string) => s
+    .toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60);
 
   const setHighlight = (idx: number, patch: Partial<NonNullable<SiteContent["about"]>["highlights"][number]>) => {
     const hs = [...(value.about?.highlights || [])];
@@ -892,30 +901,69 @@ const SiteContentEditor = ({
 
           <div className="border-t border-border pt-4 mt-2">
             <div className="flex items-center justify-between mb-3">
-              <p className="text-sm font-medium">Szolgáltatás kártyák</p>
-              <Button size="sm" variant="outline" onClick={addTile}><Plus size={14} className="mr-1" /> Új tile</Button>
+              <div>
+                <p className="text-sm font-medium">Szolgáltatás kártyák</p>
+                <p className="text-xs text-muted-foreground">{(value.services?.tiles || []).length}/{TARGET_TILE_COUNT} (mindig 6 kártya)</p>
+              </div>
+              {(value.services?.tiles || []).length < TARGET_TILE_COUNT && (
+                <Button size="sm" variant="outline" onClick={addTile}><Plus size={14} className="mr-1" /> Új kártya</Button>
+              )}
             </div>
-            <div className="space-y-3">
-              {(value.services?.tiles || []).map((t, i) => (
-                <div key={i} className="rounded-lg border border-border p-3 space-y-2 bg-muted/30">
-                  <div className="grid md:grid-cols-3 gap-2">
-                    <Field label="Ikon (User, Baby, Heart, Users, Brain, Laptop, Smile, BookOpen, Briefcase, Sparkles)">
-                      <Input value={t.icon || ""} onChange={(e) => setTile(i, { icon: e.target.value })} placeholder="User" />
-                    </Field>
-                    <Field label="Cím">
-                      <Input value={t.title || ""} onChange={(e) => setTile(i, { title: e.target.value })} />
-                    </Field>
-                    <div className="flex items-end">
-                      <Button size="sm" variant="outline" onClick={() => removeTile(i)} className="text-destructive">
-                        <Trash2 size={13} className="mr-1" /> Törlés
-                      </Button>
+            <div className="space-y-4">
+              {(value.services?.tiles || []).map((t, i) => {
+                const tilesLen = (value.services?.tiles || []).length;
+                const canRemove = tilesLen > TARGET_TILE_COUNT;
+                return (
+                  <div key={i} className="rounded-lg border border-border p-4 space-y-2 bg-muted/30">
+                    <div className="flex items-center justify-between">
+                      <p className="text-xs uppercase tracking-wider text-muted-foreground">Kártya #{i + 1}</p>
+                      {canRemove ? (
+                        <Button size="sm" variant="outline" onClick={() => removeTile(i)} className="text-destructive">
+                          <Trash2 size={13} className="mr-1" /> Törlés
+                        </Button>
+                      ) : (
+                        <span className="text-xs text-muted-foreground italic">Min. {TARGET_TILE_COUNT} kártya kötelező</span>
+                      )}
                     </div>
+                    <div className="grid md:grid-cols-3 gap-2">
+                      <Field label="Ikon (User, Baby, Heart, Users, Brain, Laptop, Smile, BookOpen, Briefcase, Sparkles)">
+                        <Input value={t.icon || ""} onChange={(e) => setTile(i, { icon: e.target.value })} placeholder="User" />
+                      </Field>
+                      <Field label="Cím">
+                        <Input
+                          value={t.title || ""}
+                          onChange={(e) => {
+                            const newTitle = e.target.value;
+                            const patch: { title: string; slug?: string } = { title: newTitle };
+                            // Auto-generate slug if empty
+                            if (!t.slug) patch.slug = slugify(newTitle);
+                            setTile(i, patch);
+                          }}
+                        />
+                      </Field>
+                      <Field label="URL slug (pl. felnott-egyeni-terapia)">
+                        <Input value={t.slug || ""} onChange={(e) => setTile(i, { slug: e.target.value })} placeholder="auto a címből" />
+                      </Field>
+                    </div>
+                    <Field label="Rövid leírás (a kártyán látszik)">
+                      <Textarea value={t.description || ""} onChange={(e) => setTile(i, { description: e.target.value })} rows={2} />
+                    </Field>
+                    <Field label="Hosszú szöveg (az aloldalon — ÜRES sor új bekezdés)">
+                      <Textarea
+                        value={t.content || ""}
+                        onChange={(e) => setTile(i, { content: e.target.value })}
+                        rows={8}
+                        placeholder="Részletes szolgáltatásleírás. Kettős sortöréssel új bekezdés."
+                      />
+                    </Field>
+                    {t.slug && (
+                      <p className="text-xs text-muted-foreground pt-1">
+                        Aloldal URL: <code className="text-foreground">/szolgaltatasok/{t.slug}</code>
+                      </p>
+                    )}
                   </div>
-                  <Field label="Leírás">
-                    <Textarea value={t.description || ""} onChange={(e) => setTile(i, { description: e.target.value })} rows={2} />
-                  </Field>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </CardContent>
