@@ -270,7 +270,8 @@ const TherapistDetail = () => {
                   </div>
                 )}
 
-                {/* Contact info */}
+                {/* Contact info — only render if at least one field present */}
+                {(therapist.hours || therapist.email || therapist.phone) && (
                 <div
                   className="rounded-2xl p-7 md:p-9 relative overflow-hidden text-primary-foreground"
                   style={{
@@ -312,6 +313,7 @@ const TherapistDetail = () => {
                     )}
                   </div>
                 </div>
+                )}
               </motion.div>
             </div>
           </div>

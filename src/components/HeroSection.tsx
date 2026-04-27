@@ -3,11 +3,17 @@ import { ArrowDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import heroImg from "@/assets/hero-therapy.jpg";
 import logoImg from "@/assets/zugloi-logo-white.png";
+import { useSiteContent } from "@/context/SiteContent";
 
 const heroVideo = `${import.meta.env.BASE_URL}hero-video-v4-loop.mp4?v=3`;
 
 const HeroSection = () => {
   const [scrollY, setScrollY] = useState(0);
+  const { hero } = useSiteContent();
+  const kicker = hero?.kicker ?? "Budapest XIV. kerület";
+  const subtitle = hero?.subtitle ?? "Komplex, magas színvonalú pszichológiai ellátás felnőtteknek, gyerekeknek, pároknak és családoknak.";
+  const primaryCta = hero?.primary_cta ?? "Időpontot kérek";
+  const secondaryCta = hero?.secondary_cta ?? "Szolgáltatásaink";
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -48,7 +54,7 @@ const HeroSection = () => {
           transition={{ delay: 0.2 }}
           className="text-primary-foreground/70 text-sm uppercase tracking-[0.25em] mb-6 font-medium"
         >
-          Budapest XIV. kerület
+          {kicker}
         </motion.p>
 
         <motion.div
@@ -71,7 +77,7 @@ const HeroSection = () => {
           transition={{ delay: 0.6 }}
           className="text-primary-foreground/80 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed mb-10"
         >
-          Komplex, magas színvonalú pszichológiai ellátás felnőtteknek, gyerekeknek, pároknak és családoknak.
+          {subtitle}
         </motion.p>
 
         <motion.div
@@ -85,13 +91,13 @@ const HeroSection = () => {
             onClick={(e) => { e.preventDefault(); document.querySelector("#kapcsolat")?.scrollIntoView({ behavior: "smooth" }); }}
             className="bg-primary-foreground text-foreground px-8 py-3.5 rounded-lg font-medium hover:opacity-90 transition-opacity"
           >
-            Időpontot kérek
+            {primaryCta}
           </a>
           <button
             onClick={scrollTo}
             className="border border-primary-foreground/30 text-primary-foreground px-8 py-3.5 rounded-lg font-medium hover:bg-primary-foreground/10 transition-colors"
           >
-            Szolgáltatásaink
+            {secondaryCta}
           </button>
         </motion.div>
       </div>

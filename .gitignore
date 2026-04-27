@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# User-uploaded media (admin UI). Persisted via Docker volume on prod.
+data/uploads/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,22 +1,48 @@
 import express from "express";
-import { readFileSync, writeFileSync, existsSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import { dirname, join, extname } from "path";
 import { randomUUID } from "crypto";
 import { execFile } from "child_process";
 import { createRequire } from "module";
+import multer from "multer";
 
 // Load .env
 const require = createRequire(import.meta.url);
 try { require("dotenv").config(); } catch {}
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const THERAPISTS_FILE       = join(__dirname, "data", "therapists.json");      // unified, has .sites[]
-const SOCIAL_POSTS_FILE     = join(__dirname, "data", "social-posts.json");
-const GELLERT_SOCIAL_POSTS_FILE = join(__dirname, "data", "gellert-social-posts.json");
+const DATA_DIR              = join(__dirname, "data");
+const THERAPISTS_FILE       = join(DATA_DIR, "therapists.json");                // unified, has .sites[]
+const SITE_CONTENT_FILE     = join(DATA_DIR, "site-content.json");
+const SOCIAL_POSTS_FILE     = join(DATA_DIR, "social-posts.json");
+const GELLERT_SOCIAL_POSTS_FILE = join(DATA_DIR, "gellert-social-posts.json");
+const UPLOADS_DIR           = join(DATA_DIR, "uploads");
+
+if (!existsSync(UPLOADS_DIR)) mkdirSync(UPLOADS_DIR, { recursive: true });
 
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: "2mb" }));
+
+// Serve user-uploaded media (volume-backed)
+app.use("/uploads", express.static(UPLOADS_DIR, { maxAge: "30d" }));
+
+// Multer: store uploads in /app/data/uploads with a uuid + original ext
+const ALLOWED_IMAGE_MIME = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => cb(null, UPLOADS_DIR),
+    filename: (_req, file, cb) => {
+      const safeExt = (extname(file.originalname) || "").toLowerCase().replace(/[^.\w]/g, "").slice(0, 10) || ".bin";
+      cb(null, `${randomUUID()}${safeExt}`);
+    },
+  }),
+  limits: { fileSize: 8 * 1024 * 1024 }, // 8MB
+  fileFilter: (_req, file, cb) => {
+    if (!ALLOWED_IMAGE_MIME.has(file.mimetype)) return cb(new Error("Unsupported file type"));
+    cb(null, true);
+  },
+});
 
 // --- Auth: reverse-proxy user (admin UI write ops) ---
 // In production, we expect a reverse proxy (Cloudflare Access / Pomerium / etc.) to inject
@@ -53,9 +79,37 @@ function readJSON(file) {
   if (!existsSync(file)) return [];
   return JSON.parse(readFileSync(file, "utf-8"));
 }
+function readJSONObject(file) {
+  if (!existsSync(file)) return {};
+  return JSON.parse(readFileSync(file, "utf-8"));
+}
 function writeJSON(file, data) {
   writeFileSync(file, JSON.stringify(data, null, 2));
 }
+
+// ─── Site content (editable homepage strings) ────────────────────────────────
+app.get("/api/site-content", (_req, res) => {
+  res.json(readJSONObject(SITE_CONTENT_FILE));
+});
+
+app.put("/api/admin/site-content", requireAuth, (req, res) => {
+  if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+    return res.status(400).json({ error: "Body must be a JSON object" });
+  }
+  writeJSON(SITE_CONTENT_FILE, req.body);
+  res.json(req.body);
+});
+
+// ─── File upload (admin) ─────────────────────────────────────────────────────
+app.post(
+  "/api/admin/upload",
+  requireAuth,
+  (req, res, next) => upload.single("file")(req, res, (err) => err ? res.status(400).json({ error: err.message }) : next()),
+  (req, res) => {
+    if (!req.file) return res.status(400).json({ error: "No file uploaded" });
+    res.status(201).json({ url: `/uploads/${req.file.filename}`, size: req.file.size, mime: req.file.mimetype });
+  },
+);
 
 // ─── Therapists (unified store, filtered by site) ────────────────────────────
 

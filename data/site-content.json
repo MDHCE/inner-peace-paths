@@ -1,0 +1,78 @@
+{
+  "hero": {
+    "kicker": "Budapest XIV. kerület",
+    "subtitle": "Komplex, magas színvonalú pszichológiai ellátás felnőtteknek, gyerekeknek, pároknak és családoknak.",
+    "primary_cta": "Időpontot kérek",
+    "secondary_cta": "Szolgáltatásaink"
+  },
+  "services": {
+    "kicker": "Szolgáltatásaink",
+    "heading": "Miben segíthetünk?",
+    "subtitle": "Minden életkorban és élethelyzetben megbízható pszichológiai támogatást nyújtunk.",
+    "tiles": [
+      {
+        "icon": "User",
+        "title": "Felnőtt egyéni terápia",
+        "description": "Klinikai szakpszichológia, pszichológiai tanácsadás, személyiségvizsgálat, autogén tréning és relaxáció."
+      },
+      {
+        "icon": "Smile",
+        "title": "Gyermekterápia",
+        "description": "Nevelési tanácsadás, iskolaérettség vizsgálata, ADHD diagnosztika, viselkedéses zavarok kezelése."
+      },
+      {
+        "icon": "Heart",
+        "title": "Párterápia",
+        "description": "Kommunikációs problémák, válságok feldolgozása, kapcsolati minták felismerése és átalakítása."
+      },
+      {
+        "icon": "Users",
+        "title": "Családterápia",
+        "description": "Gyermeknevelési problémák, családi kommunikáció, családi rendszerek vizsgálata és támogatása."
+      }
+    ]
+  },
+  "about": {
+    "kicker": "Rólunk",
+    "heading": "Professzionális segítség, bizalmas környezetben",
+    "paragraphs": [
+      "A Zuglói Pszichológiai Központ létrehozásával célunk egy komplex, magas színvonalú ellátást biztosító rendelő volt, ahol felnőtteket, gyerekeket, serdülőket, párokat és családokat fogadunk.",
+      "Kollégáink széles körű módszerspecifikus tapasztalatokkal rendelkeznek. Csecsemőkori problémáktól a felnőttkori pszichoterápiáig, pszichodiagnosztikától a tanácsadásig teljes körű ellátást kínálunk."
+    ],
+    "highlights": [
+      { "icon": "Shield", "label": "NEAK szám", "value": "513289" },
+      { "icon": "Award", "label": "Szakmai tapasztalat", "value": "15+ év" },
+      { "icon": "Clock", "label": "Nyitvatartás", "value": "H-P 8-20, Sz 8-15" }
+    ]
+  },
+  "contact": {
+    "kicker": "Kapcsolat",
+    "heading": "Vegye fel velünk a kapcsolatot",
+    "subtitle": "Forduljon hozzánk bizalommal. Előzetes bejelentkezés szükséges.",
+    "phone": "06 30 414 0029",
+    "phone_subtitle": "H és Cs 9:00–15:00",
+    "email": "info@zugloipszichologiaikozpont.hu",
+    "address": "1142 Budapest, Kassai utca 76/2.",
+    "address_subtitle": "Bejárat a Kassai utca felől",
+    "hours": "H–P: 8:00–20:00",
+    "hours_subtitle": "Szombat: 8:00–15:00",
+    "transport_public_label": "Tömegközlekedéssel",
+    "transport_public": "62, 62A, 69-es villamosok, 5-ös busz (Fűrész utca megálló), 74, 74A troli (Nezsider park).",
+    "transport_car_label": "Autóval",
+    "transport_car": "A rendelő előtt ingyenesen parkolhat."
+  },
+  "footer": {
+    "intro": "Komplex pszichológiai és pszichiáter szakorvosi járóbeteg ellátás Budapest XIV. kerületében.",
+    "operator_heading": "Üzemeltető",
+    "operator_lines": [
+      "M10 Kft.",
+      "1118 Budapest, Ménesi út 10. 1. em. 2.",
+      "Adószám: 26511995-2-43",
+      "Cégjegyzékszám: 01-09-329532"
+    ],
+    "follow_heading": "Követés",
+    "facebook_url": "https://www.facebook.com/gellerthegyirendelo/",
+    "instagram_url": "https://www.instagram.com/zugloirendelo/",
+    "neak_number": "NEAK szám: 513289"
+  }
+}
