@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Pencil, Trash2, Plus, ArrowLeft, Send, X, RefreshCw, ExternalLink } from "lucide-react";
+import { Pencil, Trash2, Plus, ArrowLeft, Send, X, RefreshCw, ExternalLink, Upload } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSite } from "@/context/SiteContext";
+import type { SiteContent } from "@/context/SiteContent";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -91,7 +92,7 @@ const STATUS_LABELS: Record<SocialPost["status"], string> = {
 
 const Admin = () => {
   const { apiBase } = useSite();
-  const [tab, setTab] = useState<"therapists" | "posts">("therapists");
+  const [tab, setTab] = useState<"therapists" | "content" | "posts">("therapists");
 
   // ── Therapists state ──────────────────────────────────────────────────────
   const [therapists, setTherapists] = useState<Therapist[]>([]);
@@ -99,6 +100,11 @@ const Admin = () => {
   const [isNew, setIsNew] = useState(false);
   const [saving, setSaving] = useState(false);
   const [siteFilter, setSiteFilter] = useState("");
+  const [uploading, setUploading] = useState(false);
+
+  // ── Site content state ────────────────────────────────────────────────────
+  const [siteContent, setSiteContent] = useState<SiteContent>({});
+  const [contentSaving, setContentSaving] = useState(false);
 
   // ── Posts state ───────────────────────────────────────────────────────────
   const [posts, setPosts] = useState<SocialPost[]>([]);
@@ -125,8 +131,49 @@ const Admin = () => {
       .then(setPosts)
       .catch(() => {});
 
+  const fetchSiteContent = () =>
+    fetch(`${apiBase}/site-content`)
+      .then((r) => r.json())
+      .then(setSiteContent)
+      .catch(() => {});
+
   useEffect(() => { fetchTherapists(); }, []);
   useEffect(() => { if (tab === "posts") fetchPosts(); }, [tab, statusFilter]);
+  useEffect(() => { if (tab === "content") fetchSiteContent(); }, [tab]);
+
+  // ── Site content handlers ────────────────────────────────────────────────
+  const handleSaveContent = async () => {
+    setContentSaving(true);
+    const res = await fetch("/api/admin/site-content", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(siteContent),
+    });
+    if (!res.ok) {
+      const msg = await res.json().catch(() => ({}));
+      alert(`Mentés sikertelen (${res.status}): ${msg.error || res.statusText}`);
+    } else {
+      alert("Tartalom mentve. A főoldal frissítése után láthatóvá válik.");
+    }
+    setContentSaving(false);
+  };
+
+  // ── Image upload handler (used by therapist edit form) ──────────────────
+  const handleImageUpload = async (file: File) => {
+    if (!editing) return;
+    setUploading(true);
+    const fd = new FormData();
+    fd.append("file", file);
+    const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
+    if (res.ok) {
+      const data = await res.json();
+      setEditing({ ...editing, image: data.url });
+    } else {
+      const msg = await res.json().catch(() => ({}));
+      alert(`Feltöltés sikertelen (${res.status}): ${msg.error || res.statusText}`);
+    }
+    setUploading(false);
+  };
 
   // ── Therapist handlers ────────────────────────────────────────────────────
 
@@ -269,6 +316,16 @@ const Admin = () => {
             Szakemberek
           </button>
           <button
+            onClick={() => setTab("content")}
+            className={`px-4 py-2 text-sm font-medium transition-colors ${
+              tab === "content"
+                ? "border-b-2 border-primary text-primary"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Tartalom
+          </button>
+          <button
             onClick={() => setTab("posts")}
             className={`px-4 py-2 text-sm font-medium transition-colors ${
               tab === "posts"
@@ -353,8 +410,33 @@ const Admin = () => {
                   </div>
                   <div className="grid gap-4 md:grid-cols-2">
                     <div>
-                      <label className="mb-1 block text-xs uppercase tracking-wider text-muted-foreground">Kép URL</label>
-                      <Input value={editing.image} onChange={(e) => setEditing({ ...editing, image: e.target.value })} placeholder="/assets/foto.jpg vagy URL" />
+                      <label className="mb-1 block text-xs uppercase tracking-wider text-muted-foreground">Kép</label>
+                      <div className="flex gap-2">
+                        <Input
+                          value={editing.image}
+                          onChange={(e) => setEditing({ ...editing, image: e.target.value })}
+                          placeholder="/uploads/foto.jpg vagy URL"
+                          className="flex-1"
+                        />
+                        <label className="inline-flex items-center gap-1.5 px-3 rounded-md border border-input bg-background hover:bg-accent text-sm font-medium cursor-pointer whitespace-nowrap">
+                          <Upload size={14} />
+                          {uploading ? "Töltés..." : "Feltöltés"}
+                          <input
+                            type="file"
+                            accept="image/jpeg,image/png,image/webp,image/gif"
+                            className="hidden"
+                            disabled={uploading}
+                            onChange={(e) => {
+                              const f = e.target.files?.[0];
+                              if (f) handleImageUpload(f);
+                              e.target.value = "";
+                            }}
+                          />
+                        </label>
+                      </div>
+                      {editing.image && (
+                        <img src={editing.image} alt="" className="mt-2 h-16 w-16 rounded object-cover border border-border" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                      )}
                     </div>
                     <div>
                       <label className="mb-1 block text-xs uppercase tracking-wider text-muted-foreground">Email</label>
@@ -476,6 +558,16 @@ const Admin = () => {
               )}
             </div>
           </>
+        )}
+
+        {/* ── CONTENT TAB ─────────────────────────────────────────────────── */}
+        {tab === "content" && (
+          <SiteContentEditor
+            value={siteContent}
+            onChange={setSiteContent}
+            onSave={handleSaveContent}
+            saving={contentSaving}
+          />
         )}
 
         {/* ── POSTS TAB ───────────────────────────────────────────────────── */}
@@ -700,5 +792,263 @@ const Admin = () => {
     </div>
   );
 };
+
+// ─── Site Content Editor ────────────────────────────────────────────────────
+
+const SiteContentEditor = ({
+  value,
+  onChange,
+  onSave,
+  saving,
+}: {
+  value: SiteContent;
+  onChange: (v: SiteContent) => void;
+  onSave: () => void;
+  saving: boolean;
+}) => {
+  const set = <K extends keyof SiteContent>(section: K, patch: Partial<NonNullable<SiteContent[K]>>) => {
+    onChange({ ...value, [section]: { ...(value[section] || {}), ...patch } });
+  };
+
+  const setTile = (idx: number, patch: Partial<NonNullable<SiteContent["services"]>["tiles"][number]>) => {
+    const tiles = [...(value.services?.tiles || [])];
+    tiles[idx] = { ...tiles[idx], ...patch };
+    set("services", { tiles });
+  };
+  const addTile = () => {
+    const tiles = [...(value.services?.tiles || []), { icon: "User", title: "", description: "" }];
+    set("services", { tiles });
+  };
+  const removeTile = (idx: number) => {
+    const tiles = (value.services?.tiles || []).filter((_, i) => i !== idx);
+    set("services", { tiles });
+  };
+
+  const setHighlight = (idx: number, patch: Partial<NonNullable<SiteContent["about"]>["highlights"][number]>) => {
+    const hs = [...(value.about?.highlights || [])];
+    hs[idx] = { ...hs[idx], ...patch };
+    set("about", { highlights: hs });
+  };
+
+  const setParagraph = (idx: number, text: string) => {
+    const ps = [...(value.about?.paragraphs || [])];
+    ps[idx] = text;
+    set("about", { paragraphs: ps });
+  };
+  const addParagraph = () => set("about", { paragraphs: [...(value.about?.paragraphs || []), ""] });
+  const removeParagraph = (idx: number) => set("about", { paragraphs: (value.about?.paragraphs || []).filter((_, i) => i !== idx) });
+
+  const setOperatorLine = (idx: number, text: string) => {
+    const ls = [...(value.footer?.operator_lines || [])];
+    ls[idx] = text;
+    set("footer", { operator_lines: ls });
+  };
+  const addOperatorLine = () => set("footer", { operator_lines: [...(value.footer?.operator_lines || []), ""] });
+  const removeOperatorLine = (idx: number) => set("footer", { operator_lines: (value.footer?.operator_lines || []).filter((_, i) => i !== idx) });
+
+  return (
+    <div className="space-y-8">
+      <div className="flex items-center justify-between">
+        <h2 className="text-lg font-semibold text-foreground">Főoldal tartalom szerkesztése</h2>
+        <Button onClick={onSave} disabled={saving}>{saving ? "Mentés..." : "Összes mentése"}</Button>
+      </div>
+
+      {/* HERO */}
+      <Card>
+        <CardHeader><CardTitle className="text-base">Hero (felső blokk)</CardTitle></CardHeader>
+        <CardContent className="space-y-3">
+          <Field label="Felső kis felirat (kicker)">
+            <Input value={value.hero?.kicker || ""} onChange={(e) => set("hero", { kicker: e.target.value })} placeholder="Budapest XIV. kerület" />
+          </Field>
+          <Field label="Alcím / leírás">
+            <Textarea value={value.hero?.subtitle || ""} onChange={(e) => set("hero", { subtitle: e.target.value })} rows={2} />
+          </Field>
+          <div className="grid md:grid-cols-2 gap-3">
+            <Field label="Elsődleges gomb felirata">
+              <Input value={value.hero?.primary_cta || ""} onChange={(e) => set("hero", { primary_cta: e.target.value })} placeholder="Időpontot kérek" />
+            </Field>
+            <Field label="Másodlagos gomb felirata">
+              <Input value={value.hero?.secondary_cta || ""} onChange={(e) => set("hero", { secondary_cta: e.target.value })} placeholder="Szolgáltatásaink" />
+            </Field>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* SERVICES */}
+      <Card>
+        <CardHeader><CardTitle className="text-base">Szolgáltatások szekció</CardTitle></CardHeader>
+        <CardContent className="space-y-3">
+          <div className="grid md:grid-cols-3 gap-3">
+            <Field label="Kicker">
+              <Input value={value.services?.kicker || ""} onChange={(e) => set("services", { kicker: e.target.value })} />
+            </Field>
+            <Field label="Cím">
+              <Input value={value.services?.heading || ""} onChange={(e) => set("services", { heading: e.target.value })} />
+            </Field>
+            <Field label="Alcím">
+              <Input value={value.services?.subtitle || ""} onChange={(e) => set("services", { subtitle: e.target.value })} />
+            </Field>
+          </div>
+
+          <div className="border-t border-border pt-4 mt-2">
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-sm font-medium">Szolgáltatás kártyák</p>
+              <Button size="sm" variant="outline" onClick={addTile}><Plus size={14} className="mr-1" /> Új tile</Button>
+            </div>
+            <div className="space-y-3">
+              {(value.services?.tiles || []).map((t, i) => (
+                <div key={i} className="rounded-lg border border-border p-3 space-y-2 bg-muted/30">
+                  <div className="grid md:grid-cols-3 gap-2">
+                    <Field label="Ikon (User, Baby, Heart, Users, Brain, Laptop, Smile, BookOpen, Briefcase, Sparkles)">
+                      <Input value={t.icon || ""} onChange={(e) => setTile(i, { icon: e.target.value })} placeholder="User" />
+                    </Field>
+                    <Field label="Cím">
+                      <Input value={t.title || ""} onChange={(e) => setTile(i, { title: e.target.value })} />
+                    </Field>
+                    <div className="flex items-end">
+                      <Button size="sm" variant="outline" onClick={() => removeTile(i)} className="text-destructive">
+                        <Trash2 size={13} className="mr-1" /> Törlés
+                      </Button>
+                    </div>
+                  </div>
+                  <Field label="Leírás">
+                    <Textarea value={t.description || ""} onChange={(e) => setTile(i, { description: e.target.value })} rows={2} />
+                  </Field>
+                </div>
+              ))}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* ABOUT */}
+      <Card>
+        <CardHeader><CardTitle className="text-base">Rólunk szekció</CardTitle></CardHeader>
+        <CardContent className="space-y-3">
+          <div className="grid md:grid-cols-2 gap-3">
+            <Field label="Kicker">
+              <Input value={value.about?.kicker || ""} onChange={(e) => set("about", { kicker: e.target.value })} />
+            </Field>
+            <Field label="Cím">
+              <Input value={value.about?.heading || ""} onChange={(e) => set("about", { heading: e.target.value })} />
+            </Field>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-medium">Bekezdések</p>
+              <Button size="sm" variant="outline" onClick={addParagraph}><Plus size={14} className="mr-1" /> Új bekezdés</Button>
+            </div>
+            {(value.about?.paragraphs || []).map((p, i) => (
+              <div key={i} className="flex gap-2 items-start">
+                <Textarea value={p} onChange={(e) => setParagraph(i, e.target.value)} rows={3} className="flex-1" />
+                <Button size="sm" variant="outline" onClick={() => removeParagraph(i)} className="text-destructive">
+                  <Trash2 size={13} />
+                </Button>
+              </div>
+            ))}
+          </div>
+
+          <div className="border-t border-border pt-4 mt-2">
+            <p className="text-sm font-medium mb-3">Kiemelt számadatok (3 db, label + érték)</p>
+            <div className="space-y-2">
+              {(value.about?.highlights || []).map((h, i) => (
+                <div key={i} className="grid md:grid-cols-3 gap-2">
+                  <Input value={h.icon || ""} onChange={(e) => setHighlight(i, { icon: e.target.value })} placeholder="Ikon (Shield/Award/Clock)" />
+                  <Input value={h.label || ""} onChange={(e) => setHighlight(i, { label: e.target.value })} placeholder="Felirat" />
+                  <Input value={h.value || ""} onChange={(e) => setHighlight(i, { value: e.target.value })} placeholder="Érték" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* CONTACT */}
+      <Card>
+        <CardHeader><CardTitle className="text-base">Kapcsolat szekció</CardTitle></CardHeader>
+        <CardContent className="space-y-3">
+          <div className="grid md:grid-cols-3 gap-3">
+            <Field label="Kicker"><Input value={value.contact?.kicker || ""} onChange={(e) => set("contact", { kicker: e.target.value })} /></Field>
+            <Field label="Cím"><Input value={value.contact?.heading || ""} onChange={(e) => set("contact", { heading: e.target.value })} /></Field>
+            <Field label="Alcím"><Input value={value.contact?.subtitle || ""} onChange={(e) => set("contact", { subtitle: e.target.value })} /></Field>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-3">
+            <Field label="Telefon"><Input value={value.contact?.phone || ""} onChange={(e) => set("contact", { phone: e.target.value })} /></Field>
+            <Field label="Telefon alfelirat"><Input value={value.contact?.phone_subtitle || ""} onChange={(e) => set("contact", { phone_subtitle: e.target.value })} /></Field>
+            <Field label="Email"><Input value={value.contact?.email || ""} onChange={(e) => set("contact", { email: e.target.value })} /></Field>
+            <Field label="Cím"><Input value={value.contact?.address || ""} onChange={(e) => set("contact", { address: e.target.value })} /></Field>
+            <Field label="Cím alfelirat"><Input value={value.contact?.address_subtitle || ""} onChange={(e) => set("contact", { address_subtitle: e.target.value })} /></Field>
+            <Field label="Nyitvatartás"><Input value={value.contact?.hours || ""} onChange={(e) => set("contact", { hours: e.target.value })} /></Field>
+            <Field label="Nyitvatartás alfelirat"><Input value={value.contact?.hours_subtitle || ""} onChange={(e) => set("contact", { hours_subtitle: e.target.value })} /></Field>
+          </div>
+
+          <div className="border-t border-border pt-4 mt-2">
+            <p className="text-sm font-medium mb-3">Megközelítés</p>
+            <div className="grid md:grid-cols-2 gap-3">
+              <Field label="Tömegközlekedés cím"><Input value={value.contact?.transport_public_label || ""} onChange={(e) => set("contact", { transport_public_label: e.target.value })} /></Field>
+              <Field label="Autó cím"><Input value={value.contact?.transport_car_label || ""} onChange={(e) => set("contact", { transport_car_label: e.target.value })} /></Field>
+              <Field label="Tömegközlekedés szöveg"><Textarea value={value.contact?.transport_public || ""} onChange={(e) => set("contact", { transport_public: e.target.value })} rows={2} /></Field>
+              <Field label="Autó szöveg"><Textarea value={value.contact?.transport_car || ""} onChange={(e) => set("contact", { transport_car: e.target.value })} rows={2} /></Field>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* FOOTER */}
+      <Card>
+        <CardHeader><CardTitle className="text-base">Footer</CardTitle></CardHeader>
+        <CardContent className="space-y-3">
+          <Field label="Bemutatkozó szöveg">
+            <Textarea value={value.footer?.intro || ""} onChange={(e) => set("footer", { intro: e.target.value })} rows={2} />
+          </Field>
+
+          <div className="grid md:grid-cols-2 gap-3">
+            <Field label="Üzemeltető cím"><Input value={value.footer?.operator_heading || ""} onChange={(e) => set("footer", { operator_heading: e.target.value })} /></Field>
+            <Field label="Követés cím"><Input value={value.footer?.follow_heading || ""} onChange={(e) => set("footer", { follow_heading: e.target.value })} /></Field>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-medium">Üzemeltető sorok</p>
+              <Button size="sm" variant="outline" onClick={addOperatorLine}><Plus size={14} className="mr-1" /> Új sor</Button>
+            </div>
+            {(value.footer?.operator_lines || []).map((line, i) => (
+              <div key={i} className="flex gap-2">
+                <Input value={line} onChange={(e) => setOperatorLine(i, e.target.value)} className="flex-1" />
+                <Button size="sm" variant="outline" onClick={() => removeOperatorLine(i)} className="text-destructive">
+                  <Trash2 size={13} />
+                </Button>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-3">
+            <Field label="Facebook URL"><Input value={value.footer?.facebook_url || ""} onChange={(e) => set("footer", { facebook_url: e.target.value })} /></Field>
+            <Field label="Instagram URL"><Input value={value.footer?.instagram_url || ""} onChange={(e) => set("footer", { instagram_url: e.target.value })} /></Field>
+          </div>
+
+          <Field label="NEAK szám sor">
+            <Input value={value.footer?.neak_number || ""} onChange={(e) => set("footer", { neak_number: e.target.value })} />
+          </Field>
+        </CardContent>
+      </Card>
+
+      <div className="sticky bottom-4 flex justify-end">
+        <Button onClick={onSave} disabled={saving} size="lg">
+          {saving ? "Mentés..." : "Összes mentése"}
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+const Field = ({ label, children }: { label: string; children: ReactNode }) => (
+  <div>
+    <label className="mb-1 block text-xs uppercase tracking-wider text-muted-foreground">{label}</label>
+    {children}
+  </div>
+);
 
 export default Admin;
