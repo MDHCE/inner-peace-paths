@@ -8,6 +8,17 @@ const iconMap: Record<string, LucideIcon> = {
   User, Baby, Smile, Heart, Users, Brain, Laptop, BookOpen, Briefcase, Sparkles,
 };
 
+// Slug helper: when a tile has no explicit slug, derive one from the title so
+// the "Részletek" link always works.
+const slugify = (s: string): string =>
+  s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60);
+
 const defaultTiles = [
   { icon: "User",   slug: "felnott-egyeni-terapia",      title: "Felnőtt egyéni terápia", description: "Klinikai szakpszichológia, pszichológiai tanácsadás, személyiségvizsgálat, autogén tréning és relaxáció." },
   { icon: "Smile",  slug: "gyermekterapia",              title: "Gyermekterápia",         description: "Nevelési tanácsadás, iskolaérettség vizsgálata, ADHD diagnosztika, viselkedéses zavarok kezelése." },
@@ -62,10 +73,14 @@ const ServicesSection = () => {
         >
           {tiles.map((s, idx) => {
             const Icon = iconMap[s.icon || ""] ?? User;
-            const hasDetails = !!s.slug;
+            // Use explicit slug if set, otherwise derive one from the title so
+            // every titled tile gets a clickable subpage even when imported
+            // from admin without a slug field.
+            const tileSlug = s.slug?.trim() || (s.title ? slugify(s.title) : "");
+            const hasDetails = !!tileSlug;
             return (
               <motion.div
-                key={(s.slug || s.title || "tile") + idx}
+                key={(tileSlug || s.title || "tile") + idx}
                 variants={item}
                 className="group bg-background rounded-xl p-8 transition-shadow duration-300 flex flex-col"
                 style={{ boxShadow: "var(--card-shadow)" }}
@@ -76,10 +91,10 @@ const ServicesSection = () => {
                   <Icon className="w-6 h-6 text-accent-foreground" />
                 </div>
                 <h3 className="font-display text-xl font-semibold text-foreground mb-3">{s.title}</h3>
-                <p className="text-muted-foreground leading-relaxed flex-1">{s.description}</p>
+                <p className="text-muted-foreground leading-relaxed flex-1 whitespace-pre-line">{s.description}</p>
                 {hasDetails && (
                   <Link
-                    to={`/szolgaltatasok/${s.slug}`}
+                    to={`/szolgaltatasok/${tileSlug}`}
                     className="mt-5 inline-flex items-center gap-2 text-primary text-sm font-medium hover:gap-3 transition-all"
                   >
                     {linkLabel}
