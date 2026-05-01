@@ -9,33 +9,45 @@
     "tiles": [
       {
         "icon": "User",
+        "slug": "szulokonzultacio",
         "title": "Szülőkonzultáció",
-        "description": "Módszer bemutatása röviden\nA szülőkonzultáció célja támogatást nyújtani olyan kérdésekben, melyekben a szülő(k)\nelakadást éreznek gyermekükkel kapcsolatban. Ide sorolhatóak a nevelési nehézségek, a\nszülő-gyermekkel kapcsolattal összefüggő kérdések, életeseményekre való felkészülés, vagy\nakár a testvérféltékenység is. Szülőkonzultáció során feltárásra kerülnek a szülők megélései, a\nprobléma kialakulásának háttere. A szülők nem pusztán új eszközöket kaphatnak a\nszakembertől, melyek segíthetnek a gyermek viselkedésére vagy érzelmeire való reagálásban,\nhanem fejlődéslélektani támpontokat is kaphatnak ahhoz, hogy elmozdulás történhessen a\ngyermek nehézségei kapcsán. Az ülések során előkerülhetnek az eredetcsaládból hozott\nminták, a szülőszerep megélésének kérdései, a bizonytalanságok. Páros szülőkonzultáció\nesetén teret kaphat a szülői munkamegosztás, egymás támogatásának kérdése, a közös nevelés\nmegerősítése is. A szülőkonzultáció irányt adhat specifikus kérdésekben, ám ezen felül a\nszülői szerep megélésében, a szülői kompetenciaérzésben is támogatást tud nyújtani a\nszülőknek.\nMilyen problémák esetén javasoljuk\n gyermeknevelési kérdések\n szülői kérdések a gyermek viselkedésének, érzelmeinek, szokásainak megértése\nkapcsán\n szülői bizonytalanság a gyermekkel kapcsolatos kérdésekben (pl. óvodai kérdések,\ntestvérhelyzet, serdülőkori működések stb.)\n változásokra, új élethelyzetekre való tudatos felkészülés (válás, mozaikcsaláddá\nalakulás, gyász)\n családi sajátosságokból fakadó kérdések átbeszélése (pl. örökbefogadás, donoros\nfogantatás, egyedülálló szülőség stb.)\n szülői kiégés"
+        "description": "Támogatás a szülő(k)nek olyan kérdésekben, amelyekben gyermekükkel kapcsolatban elakadást éreznek: nevelési nehézségek, kapcsolati kérdések, életesemények, testvérféltékenység.",
+        "content": "A szülőkonzultáció célja támogatást nyújtani olyan kérdésekben, melyekben a szülő(k) elakadást éreznek gyermekükkel kapcsolatban. Ide sorolhatóak a nevelési nehézségek, a szülő-gyermekkel kapcsolattal összefüggő kérdések, életeseményekre való felkészülés, vagy akár a testvérféltékenység is.\n\nSzülőkonzultáció során feltárásra kerülnek a szülők megélései, a probléma kialakulásának háttere. A szülők nem pusztán új eszközöket kaphatnak a szakembertől, melyek segíthetnek a gyermek viselkedésére vagy érzelmeire való reagálásban, hanem fejlődéslélektani támpontokat is kaphatnak ahhoz, hogy elmozdulás történhessen a gyermek nehézségei kapcsán. Az ülések során előkerülhetnek az eredetcsaládból hozott minták, a szülőszerep megélésének kérdései, a bizonytalanságok.\n\nPáros szülőkonzultáció esetén teret kaphat a szülői munkamegosztás, egymás támogatásának kérdése, a közös nevelés megerősítése is. A szülőkonzultáció irányt adhat specifikus kérdésekben, ám ezen felül a szülői szerep megélésében, a szülői kompetenciaérzésben is támogatást tud nyújtani a szülőknek.\n\nMilyen problémák esetén javasoljuk:\n– gyermeknevelési kérdések\n– szülői kérdések a gyermek viselkedésének, érzelmeinek, szokásainak megértése kapcsán\n– szülői bizonytalanság a gyermekkel kapcsolatos kérdésekben (pl. óvodai kérdések, testvérhelyzet, serdülőkori működések stb.)\n– változásokra, új élethelyzetekre való tudatos felkészülés (válás, mozaikcsaláddá alakulás, gyász)\n– családi sajátosságokból fakadó kérdések átbeszélése (pl. örökbefogadás, donoros fogantatás, egyedülálló szülőség stb.)\n– szülői kiégés"
       },
       {
-        "icon": "User",
+        "icon": "Brain",
+        "slug": "kognitiv-viselkedesterapia-cbt",
         "title": "Kognitív viselkedésterápia (CBT)",
-        "description": "xnÍBx,NCÍí"
+        "description": "Strukturált, jelen-fókuszú terápiás módszer szorongásos zavarok, depresszió és kapcsolati nehézségek kezelésére.",
+        "content": ""
       },
       {
-        "icon": "User",
+        "icon": "Sparkles",
+        "slug": "komplex-integrativ-terapia",
         "title": "Komplex integratív terápia",
-        "description": "jdckjjcjk"
+        "description": "Több terápiás módszer ötvözése a kliens egyéni szükségleteinek megfelelően — pszichodinamikus, kognitív és élménycentrikus elemek kombinálásával.",
+        "content": ""
       },
       {
-        "icon": "User",
+        "icon": "Baby",
+        "slug": "szulo-csecsemo-konzultacio",
         "title": "Szülő-csecsemő konzultáció",
-        "description": ""
+        "description": "0–6 éves gyermekek és szüleik számára: alvási, evési, sírással, daccal, szobatisztasággal vagy szeparációs szorongással kapcsolatos kérdésekben.",
+        "content": ""
       },
       {
-        "icon": "User",
+        "icon": "BookOpen",
+        "slug": "sematerapia",
         "title": "Sématerápia",
-        "description": ""
+        "description": "Mélyebb, gyökerekig hatoló módszer, mely a gyerekkorból eredő működési mintákat (sémákat) tárja fel és alakítja át.",
+        "content": ""
       },
       {
-        "icon": "User",
+        "icon": "Heart",
+        "slug": "emdr-terapia",
         "title": "EMDR terápia",
-        "description": ""
+        "description": "Traumafókuszú módszer szemmozgások segítségével — hatékony PTSD, akut sokk és visszatérő nehéz emlékek feldolgozására.",
+        "content": ""
       }
     ]
   },

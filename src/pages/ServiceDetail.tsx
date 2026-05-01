@@ -10,11 +10,26 @@ const iconMap: Record<string, LucideIcon> = {
   User, Baby, Smile, Heart, Users, Brain, Laptop, BookOpen, Briefcase, Sparkles,
 };
 
+// Same slug-from-title fallback used in ServicesSection so that tiles imported
+// from admin without an explicit slug still resolve to a subpage by title.
+const slugify = (s: string): string =>
+  s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60);
+
 const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { services } = useSiteContent();
   const tiles = services?.tiles || [];
-  const tile = tiles.find((t) => t.slug === slug);
+  // Match on explicit slug first, fall back to slugified title.
+  const tile = tiles.find((t) => {
+    const tileSlug = t.slug?.trim() || (t.title ? slugify(t.title) : "");
+    return tileSlug === slug;
+  });
 
   if (!tile) {
     return (
@@ -43,8 +58,14 @@ const ServiceDetail = () => {
   const pageDescription = tile.description || `${tile.title} a Zuglói Pszichológiai Központban.`;
   const paragraphs = (tile.content || "").split(/\n\n+/).filter((p) => p.trim().length);
 
-  // Suggest related services (everything except current)
-  const related = tiles.filter((t) => t.slug && t.slug !== slug).slice(0, 3);
+  // Suggest related services (everything except current). Use the same
+  // slug-with-fallback rule so tiles without explicit slugs still get listed.
+  const related = tiles
+    .filter((t) => {
+      const ts = t.slug?.trim() || (t.title ? slugify(t.title) : "");
+      return ts && ts !== slug;
+    })
+    .slice(0, 3);
 
   return (
     <>
@@ -172,10 +193,11 @@ const ServiceDetail = () => {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                   {related.map((r, i) => {
                     const RelIcon = iconMap[r.icon || ""] ?? User;
+                    const relSlug = r.slug?.trim() || (r.title ? slugify(r.title) : "");
                     return (
                       <Link
-                        key={r.slug || i}
-                        to={`/szolgaltatasok/${r.slug}`}
+                        key={relSlug || i}
+                        to={`/szolgaltatasok/${relSlug}`}
                         className="group rounded-xl p-5 bg-background hover:-translate-y-1 transition-transform"
                         style={{ boxShadow: "var(--card-shadow)" }}
                       >
