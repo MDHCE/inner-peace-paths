@@ -1,101 +1,46 @@
 {
+  "footer": {
+    "intro": "Komplex pszichológiai ellátás Budapest XIV. kerületében."
+  },
   "hero": {
-    "kicker": "Budapest XIV. kerület",
-    "subtitle": "Komplex, magas színvonalú pszichológiai ellátás felnőtteknek, gyerekeknek, pároknak és családoknak.",
-    "primary_cta": "Időpontot kérek",
-    "secondary_cta": "Szolgáltatásaink"
+    "subtitle": "Komplex, magas színvonalú pszichológiai ellátás felnőtteknek, gyerekeknek, serdülőknek."
   },
   "services": {
-    "kicker": "Szolgáltatásaink",
-    "heading": "Miben segíthetünk?",
-    "subtitle": "Minden életkorban és élethelyzetben megbízható pszichológiai támogatást nyújtunk.",
-    "details_link_label": "Részletek",
     "tiles": [
       {
         "icon": "User",
-        "slug": "felnott-egyeni-terapia",
-        "title": "Felnőtt egyéni terápia",
-        "description": "Klinikai szakpszichológia, pszichológiai tanácsadás, személyiségvizsgálat, autogén tréning és relaxáció.",
-        "content": "Felnőtt egyéni terápiánk során biztonságos, bizalmas közegben dolgozzuk fel az életkrízisek, szorongás, depresszió, kapcsolati nehézségek vagy önismereti elakadások témáit. Szakembereink integratív szemléletben dolgoznak: a kognitív viselkedésterápia, sématerápia, pszichodinamikus pszichoterápia, EMDR és imaginatív technikák közül a kliens személyiségéhez és problémájához legjobban illeszkedő módszert választjuk. Az első konzultáción közösen tisztázzuk a kéréseket és felépítjük a terápia kereteit.\n\nMikor ajánljuk:\n– Tartós szorongás, pánik, fóbiák\n– Hangulatzavarok, depresszió, kiégés\n– Életvezetési krízisek, döntéshelyzetek\n– Önismereti és önértékelési kérdések\n– Pszichoszomatikus tünetek"
+        "title": "Szülőkonzultáció",
+        "description": "Módszer bemutatása röviden\nA szülőkonzultáció célja támogatást nyújtani olyan kérdésekben, melyekben a szülő(k)\nelakadást éreznek gyermekükkel kapcsolatban. Ide sorolhatóak a nevelési nehézségek, a\nszülő-gyermekkel kapcsolattal összefüggő kérdések, életeseményekre való felkészülés, vagy\nakár a testvérféltékenység is. Szülőkonzultáció során feltárásra kerülnek a szülők megélései, a\nprobléma kialakulásának háttere. A szülők nem pusztán új eszközöket kaphatnak a\nszakembertől, melyek segíthetnek a gyermek viselkedésére vagy érzelmeire való reagálásban,\nhanem fejlődéslélektani támpontokat is kaphatnak ahhoz, hogy elmozdulás történhessen a\ngyermek nehézségei kapcsán. Az ülések során előkerülhetnek az eredetcsaládból hozott\nminták, a szülőszerep megélésének kérdései, a bizonytalanságok. Páros szülőkonzultáció\nesetén teret kaphat a szülői munkamegosztás, egymás támogatásának kérdése, a közös nevelés\nmegerősítése is. A szülőkonzultáció irányt adhat specifikus kérdésekben, ám ezen felül a\nszülői szerep megélésében, a szülői kompetenciaérzésben is támogatást tud nyújtani a\nszülőknek.\nMilyen problémák esetén javasoljuk\n gyermeknevelési kérdések\n szülői kérdések a gyermek viselkedésének, érzelmeinek, szokásainak megértése\nkapcsán\n szülői bizonytalanság a gyermekkel kapcsolatos kérdésekben (pl. óvodai kérdések,\ntestvérhelyzet, serdülőkori működések stb.)\n változásokra, új élethelyzetekre való tudatos felkészülés (válás, mozaikcsaláddá\nalakulás, gyász)\n családi sajátosságokból fakadó kérdések átbeszélése (pl. örökbefogadás, donoros\nfogantatás, egyedülálló szülőség stb.)\n szülői kiégés"
       },
       {
-        "icon": "Smile",
-        "slug": "gyermekterapia",
-        "title": "Gyermekterápia",
-        "description": "Nevelési tanácsadás, iskolaérettség vizsgálata, ADHD diagnosztika, viselkedéses zavarok kezelése.",
-        "content": "Gyermek- és serdülő szakembereink a gyermek életkorához és problémájához igazítva dolgoznak: a kisebbeknél a játék, a mese és az alkotás gyógyító erejét hívjuk segítségül, a serdülőknél strukturált beszélgetés, kognitív viselkedésterápiás és imaginatív technikák kapnak teret. A folyamatba mindig beépítjük a szülőkonzultációt, mert a változás a családi rendszerben valósul meg igazán.\n\nMikor ajánljuk:\n– Iskolaérettség, beilleszkedési nehézségek\n– Figyelemzavar, ADHD diagnosztika\n– Szorongásos és érzelemszabályozási zavarok\n– Viselkedéses problémák, dac, agresszió\n– Krízisek (válás, gyász, költözés)"
+        "icon": "User",
+        "title": "Kognitív viselkedésterápia (CBT)",
+        "description": "xnÍBx,NCÍí"
       },
       {
-        "icon": "Heart",
-        "slug": "parterapia",
-        "title": "Párterápia",
-        "description": "Kommunikációs problémák, válságok feldolgozása, kapcsolati minták felismerése és átalakítása.",
-        "content": "A párterápiás munkában a kapcsolat válik a kliensé: nem egyik vagy másik felet támogatjuk, hanem a köztük lévő dinamikát értjük meg és alakítjuk. A pár- és családterapeuta szakembereink rendszerszemléletben dolgoznak, a kommunikáció, az érzelmi szabályozás és a párkapcsolati minták felismerésén keresztül segítjük újrahangolni a közös életet.\n\nMikor ajánljuk:\n– Kommunikációs nehézségek, ismétlődő konfliktusok\n– Bizalmi krízis, hűtlenség feldolgozása\n– Életszakasz-váltások (gyerekvállalás, üres fészek, nyugdíj)\n– Intimitás, szexualitás kérdései\n– Válás vagy újraegyesülés mérlegelése"
+        "icon": "User",
+        "title": "Komplex integratív terápia",
+        "description": "jdckjjcjk"
       },
       {
-        "icon": "Users",
-        "slug": "csaladterapia",
-        "title": "Családterápia",
-        "description": "Gyermeknevelési problémák, családi kommunikáció, családi rendszerek vizsgálata és támogatása.",
-        "content": "A családterápia a teljes családi rendszert hozza be a terápiás térbe. Megnézzük, hogyan szolgálja vagy nehezíti a tüneteket a családi kommunikáció, a generációk közötti kapcsolatok, a határok és szerepek. Több családterápiás iskolára támaszkodva segítünk új mintákat felépíteni, ahol minden családtag jobban tud önmaga lenni.\n\nMikor ajánljuk:\n– Tartós szülő-gyermek konfliktusok\n– Mozaikcsalád, örökbefogadás, nevelőszülőség\n– Krónikus betegség, gyász a családban\n– Generációs és hűségkonfliktusok\n– Sajátos nevelési igényű gyermek családjának támogatása"
-      },
-      {
-        "icon": "Brain",
-        "slug": "pszichodiagnosztika",
-        "title": "Pszichodiagnosztika",
-        "description": "Intelligencia- és személyiségtesztek, figyelemzavar vizsgálata, klinikai szakvélemény.",
-        "content": "Pszichodiagnosztikai vizsgálataink szakszerű, írásos szakvéleménnyel zárulnak, melyet az iskola, a háziorvos, a pszichiáter vagy a hatóságok felé is használhat. A vizsgálat 2–4 alkalmat ölel fel: anamnézis, célzott tesztfelvétel, eredmény-megbeszélés és írásos szakvélemény átadása.\n\nMit vizsgálunk:\n– Intelligencia (WAIS-IV, WISC-IV/V)\n– Figyelmi és végrehajtó funkciók (ADHD)\n– Személyiségvonások és tünetbecslés (MMPI, projektív tesztek)\n– Iskolaérettség, tanulási nehézségek\n– Pályaválasztási tanácsadás"
-      },
-      {
-        "icon": "Baby",
-        "slug": "szulo-csecsemo-konzultacio",
+        "icon": "User",
         "title": "Szülő-csecsemő konzultáció",
-        "description": "Koragyermekkori regulációs zavarok, alvás-, evés-, sírás-problémák, kötődés támogatása 0–6 éves korban.",
-        "content": "A 0–6 év közötti gyermek és szülei közös ülésein a szülő-gyermek kapcsolat finom dinamikáját figyeljük: hogyan reagál a baba, hogyan értelmezi a szülő, és hol akad el a kommunikáció. Az integrált szülő-csecsemő konzulens módszer rövid (4–8 alkalmas), célzott segítséget ad olyan koragyermekkori nehézségeknél, amelyek könnyen krónikussá válnak, ha kezeletlenül maradnak.\n\nMikor ajánljuk:\n– Alvási problémák, éjszakai ébredés\n– Evési zavarok, hányások, étvágytalanság\n– Tartós sírás, megnyugtathatatlanság\n– Dackorszak, hisztik kezelése\n– Szobatisztaság, szeparációs szorongás"
+        "description": ""
+      },
+      {
+        "icon": "User",
+        "title": "Sématerápia",
+        "description": ""
+      },
+      {
+        "icon": "User",
+        "title": "EMDR terápia",
+        "description": ""
       }
     ]
   },
   "about": {
     "kicker": "Rólunk",
-    "heading": "Professzionális segítség, bizalmas környezetben",
-    "paragraphs": [
-      "A Zuglói Pszichológiai Központ létrehozásával célunk egy komplex, magas színvonalú ellátást biztosító rendelő volt, ahol felnőtteket, gyerekeket, serdülőket, párokat és családokat fogadunk.",
-      "Kollégáink széles körű módszerspecifikus tapasztalatokkal rendelkeznek. Csecsemőkori problémáktól a felnőttkori pszichoterápiáig, pszichodiagnosztikától a tanácsadásig teljes körű ellátást kínálunk."
-    ],
-    "highlights": [
-      { "icon": "Shield", "label": "NEAK szám", "value": "513289" },
-      { "icon": "Award", "label": "Szakmai tapasztalat", "value": "15+ év" },
-      { "icon": "Clock", "label": "Nyitvatartás", "value": "H-P 8-20, Sz 8-15" }
-    ]
-  },
-  "contact": {
-    "kicker": "Kapcsolat",
-    "heading": "Vegye fel velünk a kapcsolatot",
-    "subtitle": "Forduljon hozzánk bizalommal. Előzetes bejelentkezés szükséges.",
-    "phone": "06 30 414 0029",
-    "phone_subtitle": "H és Cs 9:00–15:00",
-    "email": "info@zugloipszichologiaikozpont.hu",
-    "address": "1142 Budapest, Kassai utca 76/2.",
-    "address_subtitle": "Bejárat a Kassai utca felől",
-    "hours": "H–P: 8:00–20:00",
-    "hours_subtitle": "Szombat: 8:00–15:00",
-    "transport_public_label": "Tömegközlekedéssel",
-    "transport_public": "62, 62A, 69-es villamosok, 5-ös busz (Fűrész utca megálló), 74, 74A troli (Nezsider park).",
-    "transport_car_label": "Autóval",
-    "transport_car": "A rendelő előtt ingyenesen parkolhat."
-  },
-  "footer": {
-    "intro": "Komplex pszichológiai és pszichiáter szakorvosi járóbeteg ellátás Budapest XIV. kerületében.",
-    "operator_heading": "Üzemeltető",
-    "operator_lines": [
-      "M10 Kft.",
-      "1118 Budapest, Ménesi út 10. 1. em. 2.",
-      "Adószám: 26511995-2-43",
-      "Cégjegyzékszám: 01-09-329532"
-    ],
-    "follow_heading": "Követés",
-    "facebook_url": "https://www.facebook.com/gellerthegyirendelo/",
-    "instagram_url": "https://www.instagram.com/zugloirendelo/",
-    "neak_number": "NEAK szám: 513289"
+    "heading": ""
   }
 }
