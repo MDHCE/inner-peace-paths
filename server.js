@@ -1,8 +1,8 @@
 import express from "express";
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
+import { readFileSync, writeFileSync, renameSync, copyFileSync, existsSync, mkdirSync } from "fs";
 import { fileURLToPath } from "url";
-import { dirname, join, extname } from "path";
-import { randomUUID } from "crypto";
+import { dirname, join, extname, basename } from "path";
+import { randomUUID, randomBytes, createHmac, scryptSync, timingSafeEqual } from "crypto";
 import { execFile } from "child_process";
 import { createRequire } from "module";
 import multer from "multer";
@@ -12,14 +12,32 @@ const require = createRequire(import.meta.url);
 try { require("dotenv").config(); } catch {}
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DATA_DIR              = join(__dirname, "data");
+
+// Writable data lives in DATA_DIR, which production mounts as a Docker volume so
+// admin edits survive redeploys. SEED_DIR holds the copies baked into the image;
+// any file missing from DATA_DIR is seeded from there on boot, so a brand-new
+// empty volume comes up with content instead of an empty site.
+const DATA_DIR = process.env.DATA_DIR || join(__dirname, "data");
+const SEED_DIR = process.env.SEED_DIR || join(__dirname, "data");
+
 const THERAPISTS_FILE       = join(DATA_DIR, "therapists.json");                // unified, has .sites[]
 const SITE_CONTENT_FILE     = join(DATA_DIR, "site-content.json");
 const SOCIAL_POSTS_FILE     = join(DATA_DIR, "social-posts.json");
 const GELLERT_SOCIAL_POSTS_FILE = join(DATA_DIR, "gellert-social-posts.json");
 const UPLOADS_DIR           = join(DATA_DIR, "uploads");
 
+if (!existsSync(DATA_DIR)) mkdirSync(DATA_DIR, { recursive: true });
 if (!existsSync(UPLOADS_DIR)) mkdirSync(UPLOADS_DIR, { recursive: true });
+
+if (SEED_DIR !== DATA_DIR) {
+  for (const file of [THERAPISTS_FILE, SITE_CONTENT_FILE, SOCIAL_POSTS_FILE, GELLERT_SOCIAL_POSTS_FILE]) {
+    const seed = join(SEED_DIR, basename(file));
+    if (!existsSync(file) && existsSync(seed)) {
+      copyFileSync(seed, file);
+      console.log(`Seeded ${basename(file)} from image defaults`);
+    }
+  }
+}
 
 const app = express();
 app.use(express.json({ limit: "2mb" }));
@@ -44,15 +62,125 @@ const upload = multer({
   },
 });
 
-// --- Auth: reverse-proxy user (admin UI write ops) ---
-// In production, we expect a reverse proxy (Cloudflare Access / Pomerium / etc.) to inject
-// the x-forwarded-user header. In development, we allow bypass so admin operations work
-// when running `npm run server` locally without a proxy.
+// --- Auth: admin password (admin UI + every /api/admin route) ---
+// Same protection an Apache .htaccess/.htpasswd pair gives: the browser shows its
+// native username/password dialog and nothing behind it loads until you pass.
+// Express serves this app rather than Apache, so the check lives here — an
+// .htaccess file would simply be ignored.
+//
+// Configure via .env:  ADMIN_USER, ADMIN_PASSWORD_HASH (see scripts/hash-admin-password.mjs).
+// A reverse proxy injecting x-forwarded-user still counts as authenticated, so
+// putting Cloudflare Access in front later changes nothing here.
+const ADMIN_USER = process.env.ADMIN_USER || "admin";
+const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH || "";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
+const ADMIN_REALM = "Rendelo Admin";
+const SESSION_COOKIE = "ipp_admin";
+const SESSION_TTL_MS = 12 * 60 * 60 * 1000;
+const SESSION_SECRET =
+  process.env.SESSION_SECRET ||
+  ADMIN_PASSWORD_HASH ||
+  ADMIN_PASSWORD ||
+  randomBytes(32).toString("hex");
+
+const authConfigured = Boolean(ADMIN_PASSWORD_HASH || ADMIN_PASSWORD);
+// Fail closed: without a configured password the admin is locked in production
+// rather than left open. The public site keeps serving either way.
+const devBypass = !authConfigured && process.env.NODE_ENV !== "production";
+
+if (!authConfigured) {
+  console.warn(
+    process.env.NODE_ENV === "production"
+      ? "ADMIN_PASSWORD_HASH is not set — the admin is locked. Set it to regain access."
+      : "ADMIN_PASSWORD_HASH is not set — admin auth bypassed for local development only.",
+  );
+}
+
+function equals(a, b) {
+  const x = Buffer.from(a);
+  const y = Buffer.from(b);
+  return x.length === y.length && timingSafeEqual(x, y);
+}
+
+// Hash format: scrypt$<saltHex>$<keyHex>
+function verifyPassword(plain) {
+  if (ADMIN_PASSWORD_HASH) {
+    const [scheme, saltHex, keyHex] = ADMIN_PASSWORD_HASH.split("$");
+    if (scheme !== "scrypt" || !saltHex || !keyHex) return false;
+    const expected = Buffer.from(keyHex, "hex");
+    try {
+      return equals(expected, scryptSync(plain, Buffer.from(saltHex, "hex"), expected.length));
+    } catch {
+      return false;
+    }
+  }
+  return ADMIN_PASSWORD ? equals(ADMIN_PASSWORD, plain) : false;
+}
+
+function checkBasicAuth(req) {
+  const header = req.headers.authorization || "";
+  if (!header.startsWith("Basic ")) return false;
+  const decoded = Buffer.from(header.slice(6), "base64").toString("utf-8");
+  const sep = decoded.indexOf(":");
+  if (sep === -1) return false;
+  return decoded.slice(0, sep) === ADMIN_USER && verifyPassword(decoded.slice(sep + 1));
+}
+
+// Short-lived signed cookie so the browser only prompts once per session, and so
+// the SPA's fetch() calls to /api/admin/* stay authenticated without relying on
+// browsers replaying Basic credentials onto a sibling path.
+function signSession() {
+  const payload = Buffer.from(
+    JSON.stringify({ user: ADMIN_USER, exp: Date.now() + SESSION_TTL_MS }),
+  ).toString("base64url");
+  const sig = createHmac("sha256", SESSION_SECRET).update(payload).digest("base64url");
+  return `${payload}.${sig}`;
+}
+
+function verifySession(value) {
+  if (!value) return false;
+  const [payload, sig] = value.split(".");
+  if (!payload || !sig) return false;
+  if (!equals(createHmac("sha256", SESSION_SECRET).update(payload).digest("base64url"), sig)) return false;
+  try {
+    return JSON.parse(Buffer.from(payload, "base64url").toString("utf-8")).exp > Date.now();
+  } catch {
+    return false;
+  }
+}
+
+function readCookie(req, name) {
+  const match = (req.headers.cookie || "")
+    .split(";")
+    .map((c) => c.trim())
+    .find((c) => c.startsWith(`${name}=`));
+  return match ? decodeURIComponent(match.slice(name.length + 1)) : "";
+}
+
+function isAuthenticated(req) {
+  if (req.headers["x-forwarded-user"] || req.headers["x-forwarded-preferred-username"]) return true;
+  if (!authConfigured) return false;
+  return verifySession(readCookie(req, SESSION_COOKIE)) || checkBasicAuth(req);
+}
+
+function challenge(res) {
+  res.set("WWW-Authenticate", `Basic realm="${ADMIN_REALM}", charset="UTF-8"`);
+}
+
 function requireAuth(req, res, next) {
-  const user = req.headers["x-forwarded-user"] || req.headers["x-forwarded-preferred-username"];
-  if (user) return next();
-  if (process.env.NODE_ENV !== "production") return next();
+  if (isAuthenticated(req) || devBypass) return next();
+  challenge(res);
   return res.status(401).json({ error: "Unauthorized" });
+}
+
+function issueSession(req, res) {
+  res.cookie(SESSION_COOKIE, signSession(), {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: req.secure || req.headers["x-forwarded-proto"] === "https",
+    maxAge: SESSION_TTL_MS,
+    path: "/",
+  });
 }
 
 // --- Auth: agent key (social agent POST) ---
@@ -83,8 +211,12 @@ function readJSONObject(file) {
   if (!existsSync(file)) return {};
   return JSON.parse(readFileSync(file, "utf-8"));
 }
+// Write via a temp file + rename so an interrupted write can never leave a
+// half-written (unparseable) JSON file behind on the volume.
 function writeJSON(file, data) {
-  writeFileSync(file, JSON.stringify(data, null, 2));
+  const tmp = `${file}.${process.pid}.tmp`;
+  writeFileSync(tmp, JSON.stringify(data, null, 2));
+  renameSync(tmp, file);
 }
 
 // ─── Site content (editable homepage strings) ────────────────────────────────
@@ -151,7 +283,7 @@ app.get("/api/gellert/therapists/:slug", (req, res) => {
 });
 
 // Admin: all therapists regardless of site (CRUD)
-app.get("/api/admin/therapists", (_req, res) => {
+app.get("/api/admin/therapists", requireAuth, (_req, res) => {
   res.json(readJSON(THERAPISTS_FILE));
 });
 
@@ -401,6 +533,32 @@ app.delete("/api/gellert/social-posts/:id", requireAuth, (req, res) => {
   writeJSON(GELLERT_SOCIAL_POSTS_FILE, posts);
   res.status(204).end();
 });
+
+// ─── Admin pages (password-gated before the SPA is ever served) ───────────────
+if (existsSync(DIST_DIR)) {
+  const serveAdmin = (indexPath) => (req, res) => {
+    if (!isAuthenticated(req) && !devBypass) {
+      challenge(res);
+      return res.status(401).type("html").send(
+        "<!doctype html><meta charset=utf-8><title>401</title>" +
+          "<p>Bejelentkezés szükséges. / Authentication required.</p>",
+      );
+    }
+    if (authConfigured) issueSession(req, res);
+    res.sendFile(indexPath);
+  };
+
+  app.get("/admin/logout", (_req, res) => {
+    res.clearCookie(SESSION_COOKIE, { path: "/" });
+    res.type("html").send(
+      "<!doctype html><meta charset=utf-8><title>Kijelentkezve</title>" +
+        "<p>Kijelentkezve. / Signed out. <a href=\"/\">Vissza a főoldalra</a></p>",
+    );
+  });
+
+  app.get("/admin", serveAdmin(join(DIST_DIR, "index.html")));
+  app.get("/gellert/admin", serveAdmin(join(DIST_DIR, "gellert", "index.html")));
+}
 
 // ─── SPA fallback ─────────────────────────────────────────────────────────────
 if (existsSync(DIST_DIR)) {
