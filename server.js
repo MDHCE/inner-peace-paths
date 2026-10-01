@@ -102,10 +102,13 @@ function equals(a, b) {
   return x.length === y.length && timingSafeEqual(x, y);
 }
 
-// Hash format: scrypt$<saltHex>$<keyHex>
+// Hash format: scrypt:<saltHex>:<keyHex>
+// Deliberately ":"-separated, not "$": the hash is passed through docker-compose
+// environment interpolation, which would try to expand a "$" as a variable.
+// "$" is still accepted so an already-generated hash keeps working.
 function verifyPassword(plain) {
   if (ADMIN_PASSWORD_HASH) {
-    const [scheme, saltHex, keyHex] = ADMIN_PASSWORD_HASH.split("$");
+    const [scheme, saltHex, keyHex] = ADMIN_PASSWORD_HASH.split(/[:$]/);
     if (scheme !== "scrypt" || !saltHex || !keyHex) return false;
     const expected = Buffer.from(keyHex, "hex");
     try {

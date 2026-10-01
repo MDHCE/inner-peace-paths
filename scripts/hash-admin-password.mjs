@@ -24,4 +24,6 @@ if (password.length < 12) {
 const salt = randomBytes(16);
 const key = scryptSync(password, salt, 32);
 
-console.log(`ADMIN_PASSWORD_HASH=scrypt$${salt.toString("hex")}$${key.toString("hex")}`);
+// ":"-separated rather than "$"-separated so the value survives docker-compose
+// environment interpolation and shell expansion untouched.
+console.log(`ADMIN_PASSWORD_HASH=scrypt:${salt.toString("hex")}:${key.toString("hex")}`);

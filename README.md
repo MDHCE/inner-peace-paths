@@ -26,6 +26,9 @@ environment variables of the production host. Set `ADMIN_USER` too if you want
 something other than `admin`. The plain password is never stored — only the
 scrypt hash, so the `.env` file leaking does not hand over the password.
 
+The hash is `scrypt:<salt>:<key>` — colon-separated on purpose, so it passes
+through docker-compose variable interpolation and shell quoting unchanged.
+
 Visiting the admin then produces the browser's own username/password dialog.
 Signing in sets a 12-hour session cookie; `/admin/logout` ends it.
 
